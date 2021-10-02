@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/focus_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:text="@string/time_working"
+        android:textColor="@color/primary_blue"
+        android:textSize="36sp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="73dp"
+        android:contentDescription="@string/timer"
+        android:src="@drawable/timer" />
+
+    <LinearLayout
+        android:layout_below="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_round_library_music_24"
+            android:layout_marginRight="26dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dream On - ROGER TERRY"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Break"
+        android:textAllCaps="false"
+        android:layout_marginTop="29dp"
+        android:layout_marginHorizontal="47dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="@color/secondary_blue"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Finish"
+        android:textAllCaps="false"
+        android:layout_marginTop="29dp"
+        android:layout_marginHorizontal="47dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="@color/secondary_blue"/>
+</LinearLayout>

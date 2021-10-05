@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsFocus">
         <activity
+<<<<<<< HEAD
             android:name=".Focus"
+=======
+            android:name=".RegisterActivity"
+>>>>>>> 23459e3 ( tung register form)
             android:exported="true" />
         <activity
             android:name=".MainActivity"

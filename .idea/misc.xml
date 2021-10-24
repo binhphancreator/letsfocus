@@ -12,21 +12,6 @@
         <entry key="..\:/Android Studio/letfocus/letsfocus/app/src/main/res/layout/fragment_dashboard.xml" value="0.25181159420289856" />
         <entry key="..\:/Android Studio/letfocus/letsfocus/app/src/main/res/layout/fragment_home.xml" value="0.19746376811594202" />
         <entry key="..\:/Android Studio/letfocus/letsfocus/app/src/main/res/layout/fragment_notifications.xml" value="0.25181159420289856" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/drawable-v24/custom_background_radius.xml" value="0.11614583333333334" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/drawable-v24/ic_add_circle.xml" value="0.22552083333333334" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/drawable-v24/ic_brightness.xml" value="0.22552083333333334" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/drawable-v24/ic_calendar.xml" value="0.22552083333333334" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/drawable-v24/ic_check_circle.xml" value="0.22552083333333334" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/card_music.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/card_task.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/card_timetable.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/fragment_music.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/fragment_timetable_add_task.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/fragment_timetable_details.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/fragment_timetable_list.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/fragment_timetable_task.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/popup_repeat_1.xml" value="0.10182370820668693" />
-        <entry key="..\:/Android/letsfocus1/app/src/main/res/layout/popup_repeat_2.xml" value="0.10182370820668693" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.3828125" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/drawable/ic_ring_circled.xml" value="0.3828125" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/activity_main.xml" value="0.20742753623188406" />
@@ -36,10 +21,14 @@
         <entry key="..\:/Project/LetsFocus/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/drawable/ic_action_arrow_down.xml" value="0.3769230769230769" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/drawable/ic_baseline_fiber_manual_record_24.xml" value="0.3769230769230769" />
+        <entry key="..\:/Project/letsfocus/app/src/main/res/drawable/ic_home.xml" value="0.3769230769230769" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/drawable/pie_chart.xml" value="0.3769230769230769" />
+        <entry key="..\:/Project/letsfocus/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/layout/fragment_report2.xml" value="0.36666666666666664" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/layout/fragment_setting.xml" value="0.33" />
+        <entry key="..\:/Project/letsfocus/app/src/main/res/layout/fragment_timetable_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/layout/report_parent_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Project/letsfocus/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36102564102564105" />
       </map>
     </option>
   </component>

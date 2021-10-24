@@ -9,17 +9,17 @@
 
 ## Milestone UI
 
-- **(Home UI(To Do List))**: Phan Văn Bình
-- **(Focus UI)**: Trần Văn Luân
-- **(Add ToDo List UI)**: Trần Văn Luân
-- **(Report 1 UI)**: Trần Văn Luân
-- **(Register UI)**: Nguyễn Kim Tùng
-- **(Login UI)**: Nguyễn Kim Tùng
-- **(Timetable 1)**: Trần Hải Nam
-- **(Timetable 2)**: Trần Hải Nam
-- **(Timetable 3)**: Trần Hải Nam
-- **(Timetable 4)**: Trần Hải Nam
-- **(Music UI)**: Trần Hải Nam
-- **(Profile UI)**: Nguyễn Ngọc Thành
-- **(Setting UI)**: Nguyễn Ngọc Thành
-- **(Report 2 UI)**: Nguyễn Ngọc Thành
+- **Home UI(To Do List)**: Phan Văn Bình
+- **Focus UI**: Trần Văn Luân
+- **Add ToDo List UI**: Trần Văn Luân
+- **Report 1 UI**: Trần Văn Luân
+- **Register UI**: Nguyễn Kim Tùng
+- **Login UI**: Nguyễn Kim Tùng
+- **Timetable 1**: Trần Hải Nam
+- **Timetable 2**: Trần Hải Nam
+- **Timetable 3**: Trần Hải Nam
+- **Timetable 4**: Trần Hải Nam
+- **Music UI**: Trần Hải Nam
+- **Profile UI**: Nguyễn Ngọc Thành
+- **Setting UI**: Nguyễn Ngọc Thành
+- **Report 2 UI**: Nguyễn Ngọc Thành

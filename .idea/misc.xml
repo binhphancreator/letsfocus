@@ -12,23 +12,18 @@
         <entry key="..\:/Android Studio/letfocus/letsfocus/app/src/main/res/layout/fragment_dashboard.xml" value="0.25181159420289856" />
         <entry key="..\:/Android Studio/letfocus/letsfocus/app/src/main/res/layout/fragment_home.xml" value="0.19746376811594202" />
         <entry key="..\:/Android Studio/letfocus/letsfocus/app/src/main/res/layout/fragment_notifications.xml" value="0.25181159420289856" />
-        <entry key="..\:/Project/LetsFocus/app/src/main/res/drawable/ic_action_arrow.xml" value="0.3828125" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.3828125" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/drawable/ic_ring_circled.xml" value="0.3828125" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/activity_main.xml" value="0.20742753623188406" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/card_todo_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/fragment_add_todo.xml" value="0.3220108695652174" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/fragment_dashboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/fragment_profile.xml" value="0.3220108695652174" />
-        <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/fragment_reportapp.xml" value="0.3220108695652174" />
-        <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/fragment_setting.xml" value="0.3220108695652174" />
-        <entry key="..\:/Project/LetsFocus/app/src/main/res/layout/profile_list.xml" value="0.3120471014492754" />
         <entry key="..\:/Project/LetsFocus/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Project/letsfocus/app/src/main/res/layout/fragment_setting.xml" value="0.33" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -1,20 +1,18 @@
-package com.app.letsfocus.ui.add_todo;
+package com.app.letsfocus.ui.timetable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.app.letsfocus.R;
 
-public class AddTodoFragment extends Fragment {
+public class TimeTableListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_todo, container, false);
+        return inflater.inflate(R.layout.fragment_timetable_list, container, false);
     }
 }

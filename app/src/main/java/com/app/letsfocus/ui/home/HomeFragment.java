@@ -6,13 +6,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.app.letsfocus.MainActivity;
+import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.ToDoListAdapter;
 import com.app.letsfocus.databinding.FragmentHomeBinding;
+import com.app.letsfocus.ui.add_todo.AddTodoFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +43,18 @@ public class HomeFragment extends Fragment {
         listData.add(new Object());
         ToDoListAdapter adapter = new ToDoListAdapter(getActivity(), listData);
         toDoList.setAdapter(adapter);
+
+        Button report1_btn = (Button) root.findViewById(R.id.add_todo_btn);
+        report1_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                MainActivity mainActivity = new MainActivity();
+//                mainActivity.loadFragment(new AddTodoFragment());
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                fr.replace(R.id.nav_host_fragment_activity_main, new AddTodoFragment());
+                fr.commit();
+            }
+        });
         return root;
     }
 

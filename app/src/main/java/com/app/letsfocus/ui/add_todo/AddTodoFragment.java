@@ -26,7 +26,7 @@ public class AddTodoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_add_todo, container, false);
-        Button report1_btn = (Button) view.findViewById(R.id.save_add_todo);
+        Button saveTodoBtn = (Button) view.findViewById(R.id.save_add_todo);
         EditText todoNameEt = (EditText) view.findViewById(R.id.todoName);
         EditText todoTimeEt = (EditText) view.findViewById(R.id.todoTime);
         EditText todoDurationEt = (EditText) view.findViewById(R.id.todoDuration);
@@ -37,7 +37,7 @@ public class AddTodoFragment extends Fragment {
         // create table
         database.QueryData("CREATE TABLE IF NOT EXISTS Todo(Id INTEGER PRIMARY KEY AUTOINCREMENT, todoName varchar(200), todoTime varchar(200), todoDuration varchar(200), todoDetail varchar(200) )");
 
-        report1_btn.setOnClickListener(new View.OnClickListener() {
+        saveTodoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
@@ -46,21 +46,13 @@ public class AddTodoFragment extends Fragment {
                 todoTime = todoTimeEt.getText().toString();
                 todoDuration = todoDurationEt.getText().toString();
                 todoDetail = todoDetailEt.getText().toString();
-                if(!todoName.isEmpty() && !todoTime.isEmpty() && !todoDuration.isEmpty()) {
-                    String sqltmp = SqlAddTodo(todoName,todoTime,todoDuration,todoDetail);
-                    database.QueryData(sqltmp);
+                if(checkTodo()) {
+                    database.QueryData(SqlAddTodo(todoName,todoTime,todoDuration,todoDetail));
                     fr.commit();
                 }
-                else {
-                    Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
-                }
-                getTodoData();
             }
         });
         return view;
-    }
-    public void saveTodo() {
-
     }
 
     public String SqlAddTodo(String todoName, String todoTime, String todoDuration, String todoDetail) {
@@ -70,27 +62,48 @@ public class AddTodoFragment extends Fragment {
                 + "'" + todoName + "', "
                 + "'" + todoTime + "', "
                 + "'" + todoDuration + "', "
-                + "'" + todoDuration + "' )";
+                + "'" + todoDetail + "' )";
     }
-    public  void getTodoData() {
-        Cursor dataTest = database.GetData("SELECT * FROM Todo");
-        while (dataTest.moveToNext()) {
-            Integer isWorkInt = dataTest.getInt(3);
-            Boolean isWork = false;
-            if(isWorkInt == 1) {
-                isWork = true;
-            }
-            todoName = dataTest.getString(1);
-            todoTime = dataTest.getString(2);
-            todoDuration = dataTest.getString(3);
-            todoDetail = dataTest.getString(4);
-            todo = new TodoModel(todoName, todoTime, todoDuration, todoDetail);
-            Toast.makeText(getContext(), todo.getTodoName() + "\n"
-                                        + todo.getTodoTime() + "\n"
-                                        + todo.getTodoDuration() + "\n"
-                                        + todo.getTodoDetail(), Toast.LENGTH_SHORT).show();
-            //workArrayList.add(new Work(dataTest.getInt(0),dataTest.getString(1),dataTest.getString(2),isWork));
 
+    public boolean checkTodo() {
+        if(todoName.isEmpty() || todoTime.isEmpty() || todoDuration.isEmpty()) {
+            Toast.makeText(getContext(), "Không được bỏ trống", Toast.LENGTH_SHORT).show();
+            return false;
         }
+        if(todoName.length() >= 200 || todoDetail.length() >= 200) {
+            Toast.makeText(getContext(), "Độ dài tên và mô tả tối đa 255 ký tự", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!checkTime()) {
+            return false;
+        }
+        if(Integer.parseInt(todoDuration) > 1000) {
+            Toast.makeText(getContext(), "Khoảng thời gian tối đa là 1000", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+    public boolean checkTime() {
+        String[] timeTemp;
+        int hours, minutes;
+        if(todoTime.contains(":")) {
+            timeTemp = todoTime.split(":");
+            hours = Integer.parseInt(timeTemp[0]);
+            minutes = Integer.parseInt(timeTemp[1]);
+        }
+        else {
+            Toast.makeText(getContext(), "Thời gian không hợp lệ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(todoTime.length() > 5) {
+            Toast.makeText(getContext(), "Thời gian không hợp lệ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(hours > 23 || minutes > 59) {
+            Toast.makeText(getContext(), "Thời gian không hợp lệ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

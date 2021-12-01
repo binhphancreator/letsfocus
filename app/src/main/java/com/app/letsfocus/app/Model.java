@@ -10,16 +10,14 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Model extends SQLiteOpenHelper{
+public abstract class Model extends SQLiteOpenHelper implements Cloneable{
     protected static final String DATABASE_NAME = "letsfocus";
     protected SQLiteDatabase db;
-    protected List<ContentValues> datarows;
-    private boolean single = false;
+    protected ContentValues datarow;
 
     public Model(Context context) {
         super(context, DATABASE_NAME, null, 1);
         db = getWritableDatabase();
-        datarows = new ArrayList<>();
     }
 
     @Override
@@ -39,14 +37,26 @@ public abstract class Model extends SQLiteOpenHelper{
     public Model find(Object id)
     {
         Cursor cursor = db.query(table(), null, String.format("%s = ?", primaryKey()), new String[]{String.valueOf(id)}, null, null, null);
-        datarows = convertCursorToContentValue(cursor);
-        single = true;
+        List<ContentValues> datarows = convertCursorToContentValue(cursor);
+        datarow = datarows.size() > 0 ? datarows.get(0) : null;
         return this;
     }
 
     public Model create(ContentValues contentValues) {
         long id = db.insert(table(), null, contentValues);
         return find(id);
+    }
+
+    public List<Model> all()
+    {
+        List<Model> list = new ArrayList<>();
+        String selectAll = String.format("SELECT * FROM %s", table());
+        Cursor cursor = db.rawQuery(selectAll, null);
+        List<ContentValues> datarows = convertCursorToContentValue(cursor);
+        datarows.stream().forEach( datarow -> {
+            list.add(clone(datarow));
+        });
+        return list;
     }
 
     private List<ContentValues> convertCursorToContentValue(Cursor cursor) {
@@ -66,10 +76,22 @@ public abstract class Model extends SQLiteOpenHelper{
 
     public String get(String key)
     {
-        if(single && datarows.size() > 0) {
-            if(!datarows.get(0).containsKey(key)) return null;
-            return datarows.get(0).getAsString(key);
+        if(!datarow.containsKey(key)) return null;
+        return datarow.getAsString(key);
+    }
+
+    public String toString() {
+        if(datarow != null) return "null";
+        return datarow.toString();
+    }
+
+    private Model clone(ContentValues datarow){
+        try {
+            Model model = (Model) super.clone();
+            model.datarow = datarow;
+            return model;
+        } catch (CloneNotSupportedException ex) {
+            return null;
         }
-        return null;
     }
 }

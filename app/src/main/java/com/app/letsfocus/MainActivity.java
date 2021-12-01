@@ -52,6 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadFragment(Fragment fragment) {
-        Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, this);
+        Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, getSupportFragmentManager());
     }
 }

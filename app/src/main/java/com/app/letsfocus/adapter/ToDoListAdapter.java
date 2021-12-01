@@ -5,17 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
+import android.widget.TextView;
 import com.app.letsfocus.R;
-
+import com.app.letsfocus.app.Model;
 import java.util.List;
 
 public class ToDoListAdapter extends BaseAdapter {
-    private List<Object> listData;
+    private List<Model> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public ToDoListAdapter(Context context, List<Object> listData) {
+    public ToDoListAdapter(Context context, List<Model> listData) {
         this.context = context;
         this.listData = listData;
     }
@@ -26,7 +26,7 @@ public class ToDoListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public Model getItem(int i) {
         return listData.get(i);
     }
 
@@ -38,8 +38,13 @@ public class ToDoListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null){
-            view = layoutInflater.from(context).inflate(R.layout.card_todo_list, viewGroup,false);
-            Object currentItem = getItem(i);
+            view = LayoutInflater.from(context).inflate(R.layout.card_todo_list, viewGroup,false);
+            Model toDoModel = getItem(i);
+            TextView txtTodoName = view.findViewById(R.id.todoName);
+            TextView txtTodoTime = (TextView) view.findViewById(R.id.todoTime);
+
+            txtTodoName.setText(toDoModel.get("name"));
+            txtTodoTime.setText(toDoModel.get("time"));
         }
         return view;
     }

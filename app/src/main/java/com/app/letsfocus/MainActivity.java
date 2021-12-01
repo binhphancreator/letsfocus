@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.app.letsfocus.app.Helper;
 import com.app.letsfocus.databinding.ActivityMainBinding;
 import com.app.letsfocus.ui.home.HomeFragment;
 import com.app.letsfocus.ui.profile.ProfileFragment;
@@ -50,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.detach(Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main)));
-        transaction.replace(R.id.nav_host_fragment_activity_main, fragment);
-        transaction.commitNow();
+        Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, this);
     }
 }

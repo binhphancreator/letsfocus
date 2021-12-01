@@ -1,5 +1,6 @@
 package com.app.letsfocus.ui.add_todo;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.app.letsfocus.R;
 import com.app.letsfocus.app.Helper;
+import com.app.letsfocus.app.Model;
+import com.app.letsfocus.model.ToDo;
 import com.app.letsfocus.ui.home.HomeFragment;
 
 public class AddTodoFragment extends Fragment {
@@ -37,6 +40,12 @@ public class AddTodoFragment extends Fragment {
         saveTodoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("name", todoNameEt.getText().toString());
+                contentValues.put("time", todoTimeEt.getText().toString());
+                contentValues.put("duration", todoDurationEt.getText().toString());
+                contentValues.put("detail", todoDetailEt.getText().toString());
+                Model todoModel = new ToDo(getContext()).create(contentValues);
                 Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
             }
         });

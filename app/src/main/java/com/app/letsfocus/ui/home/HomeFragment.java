@@ -1,61 +1,56 @@
 package com.app.letsfocus.ui.home;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import com.app.letsfocus.MainActivity;
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.ToDoListAdapter;
+import com.app.letsfocus.app.Helper;
+import com.app.letsfocus.app.Model;
 import com.app.letsfocus.databinding.FragmentHomeBinding;
+import com.app.letsfocus.model.ToDo;
 import com.app.letsfocus.ui.add_todo.AddTodoFragment;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
+    private View root;
+    private Button addToDoBtn;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(HomeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        bindComponent(inflater, container);
+        renderToDoList();
+        registerEvent();
+        return root;
+    }
 
+    private void bindComponent(@NonNull LayoutInflater inflater, ViewGroup container) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
+        addToDoBtn = (Button) root.findViewById(R.id.add_todo_btn);
+    }
 
+    private void renderToDoList() {
         final ListView toDoList = binding.toDoList;
-        List<Object> listData = new ArrayList<>();
-        listData.add(new Object());
-        listData.add(new Object());
-        listData.add(new Object());
+        List<Model> listData = new ToDo(getContext()).all();
         ToDoListAdapter adapter = new ToDoListAdapter(getActivity(), listData);
         toDoList.setAdapter(adapter);
+    }
 
-        Button report1_btn = (Button) root.findViewById(R.id.add_todo_btn);
-        report1_btn.setOnClickListener(new View.OnClickListener() {
+    private void registerEvent()
+    {
+        addToDoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                MainActivity mainActivity = new MainActivity();
-//                mainActivity.loadFragment(new AddTodoFragment());
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.nav_host_fragment_activity_main, new AddTodoFragment());
-                fr.commit();
+                Helper.loadFragment(R.id.nav_host_fragment_activity_main, new AddTodoFragment(), getFragmentManager());
             }
         });
-        return root;
     }
 
     @Override

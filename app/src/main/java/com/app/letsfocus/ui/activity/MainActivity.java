@@ -1,12 +1,9 @@
 package com.app.letsfocus.ui.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.app.letsfocus.R;
 import com.app.letsfocus.app.Helper;
@@ -28,21 +25,18 @@ public class MainActivity extends AppCompatActivity {
         Helper.loadToolbar(this, R.id.my_toolbar);
 
         BottomNavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if(id == R.id.navigation_home) {
-                    loadFragment(new HomeFragment());
-                } else if(id == R.id.navigation_timetable) {
-                    loadFragment(new TimeTableListFragment());
-                } else if(id == R.id.navigation_report) {
-                    loadFragment(new Report1Fragment());
-                } else if(id==R.id.navigation_profile) {
-                    loadFragment(new ProfileFragment());
-                }
-                return true;
+        navigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            int id = menuItem.getItemId();
+            if(id == R.id.navigation_home) {
+                loadFragment(new HomeFragment());
+            } else if(id == R.id.navigation_timetable) {
+                loadFragment(new TimeTableListFragment());
+            } else if(id == R.id.navigation_report) {
+                loadFragment(new Report1Fragment());
+            } else if(id==R.id.navigation_profile) {
+                loadFragment(new ProfileFragment());
             }
+            return true;
         });
     }
 

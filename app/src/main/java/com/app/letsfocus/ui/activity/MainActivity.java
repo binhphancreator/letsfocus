@@ -25,9 +25,7 @@ public class MainActivity extends AppCompatActivity {
         com.app.letsfocus.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Helper.loadToolbar(this, R.id.my_toolbar);
 
         BottomNavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -7,40 +7,39 @@
     android:layout_height="250dp"
 
     >
+
     <ImageView
         android:id="@+id/musicImg"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
 
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/musicName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="music Name"
-        android:textSize="18sp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:layout_marginTop="8dp"
+        android:text="music Name"
+        android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/musicImg"
         app:layout_constraintStart_toStartOf="parent"
 
-        />
+        app:layout_constraintTop_toBottomOf="@+id/musicImg" />
 
     <TextView
         android:id="@+id/singer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="singer"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:layout_marginBottom="20dp"
+        android:text="singer"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/musicName"
         app:layout_constraintTop_toBottomOf="@+id/musicName">

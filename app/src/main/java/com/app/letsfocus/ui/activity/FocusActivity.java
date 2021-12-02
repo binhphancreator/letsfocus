@@ -1,9 +1,11 @@
-package com.app.letsfocus;
+package com.app.letsfocus.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Focus extends AppCompatActivity {
+import com.app.letsfocus.R;
+
+public class FocusActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

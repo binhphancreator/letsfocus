@@ -5,30 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Music"
-        android:textSize="23dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
+    tools:context=".ui.fragment.music.MusicFragment">
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:numColumns="2"
         android:stretchMode="columnWidth"
         app:layout_constraintBottom_toBottomOf="parent"

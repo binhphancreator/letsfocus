@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.app.letsfocus.ui.home.HomeFragment"
+        android:name="com.app.letsfocus.ui.fragment.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_timetable"
-        android:name="com.app.letsfocus.ui.timetable.TimeTableListFragment"
+        android:name="com.app.letsfocus.ui.fragment.timetable.TimeTableListFragment"
         android:label="Timetable"
         tools:layout="@layout/fragment_timetable_list" />
 
     <fragment
         android:id="@+id/navigation_report"
-        android:name="com.app.letsfocus.ui.report1.Report1Fragment"
+        android:name="com.app.letsfocus.ui.fragment.report1.Report1Fragment"
         android:label="Report"
         tools:layout="@layout/fragment_report1" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.app.letsfocus.ui.profile.ProfileFragment"
+        android:name="com.app.letsfocus.ui.fragment.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

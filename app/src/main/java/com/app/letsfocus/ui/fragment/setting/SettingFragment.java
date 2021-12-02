@@ -1,4 +1,4 @@
-package com.app.letsfocus.ui.setting;
+package com.app.letsfocus.ui.fragment.setting;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

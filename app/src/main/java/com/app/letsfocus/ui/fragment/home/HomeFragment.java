@@ -1,5 +1,6 @@
-package com.app.letsfocus.ui.home;
+package com.app.letsfocus.ui.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -8,13 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.app.letsfocus.ui.activity.FocusActivity;
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.ToDoListAdapter;
 import com.app.letsfocus.app.Helper;
 import com.app.letsfocus.app.Model;
 import com.app.letsfocus.databinding.FragmentHomeBinding;
 import com.app.letsfocus.model.ToDo;
-import com.app.letsfocus.ui.add_todo.AddTodoFragment;
+import com.app.letsfocus.ui.fragment.add_todo.AddTodoFragment;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -22,6 +25,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private View root;
     private Button addToDoBtn;
+    private ListView toDoList;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         bindComponent(inflater, container);
@@ -37,7 +41,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void renderToDoList() {
-        final ListView toDoList = binding.toDoList;
+        toDoList = binding.toDoList;
         List<Model> listData = new ToDo(getContext()).all();
         ToDoListAdapter adapter = new ToDoListAdapter(getActivity(), listData);
         toDoList.setAdapter(adapter);
@@ -50,6 +54,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Helper.loadFragment(R.id.nav_host_fragment_activity_main, new AddTodoFragment(), getFragmentManager());
             }
+        });
+
+        toDoList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getActivity(), FocusActivity.class);
+            startActivity(intent);
         });
     }
 

@@ -1,4 +1,4 @@
-package com.app.letsfocus.ui.add_timetable;
+package com.app.letsfocus.ui.fragment.add_timetable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.app.letsfocus.R;
-import com.app.letsfocus.ui.home.HomeFragment;
-import com.app.letsfocus.ui.timetable.TimeTableListFragment;
+import com.app.letsfocus.ui.fragment.timetable.TimeTableListFragment;
 
 public class AddTimeTableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

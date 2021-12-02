@@ -1,4 +1,4 @@
-package com.app.letsfocus.ui.todolist;
+package com.app.letsfocus.ui.fragment.todolist;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

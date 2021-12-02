@@ -1,23 +1,20 @@
-package com.app.letsfocus;
+package com.app.letsfocus.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.app.letsfocus.R;
 import com.app.letsfocus.app.Helper;
 import com.app.letsfocus.databinding.ActivityMainBinding;
-import com.app.letsfocus.ui.home.HomeFragment;
-import com.app.letsfocus.ui.profile.ProfileFragment;
-import com.app.letsfocus.ui.report1.Report1Fragment;
-import com.app.letsfocus.ui.timetable.TimeTableListFragment;
-import java.util.Objects;
+import com.app.letsfocus.ui.fragment.home.HomeFragment;
+import com.app.letsfocus.ui.fragment.profile.ProfileFragment;
+import com.app.letsfocus.ui.fragment.report1.Report1Fragment;
+import com.app.letsfocus.ui.fragment.timetable.TimeTableListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

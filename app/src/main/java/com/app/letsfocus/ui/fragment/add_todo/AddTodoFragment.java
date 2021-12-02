@@ -1,4 +1,4 @@
-package com.app.letsfocus.ui.add_todo;
+package com.app.letsfocus.ui.fragment.add_todo;
 
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.app.letsfocus.R;
 import com.app.letsfocus.app.Helper;
 import com.app.letsfocus.app.Model;
 import com.app.letsfocus.model.ToDo;
-import com.app.letsfocus.ui.home.HomeFragment;
+import com.app.letsfocus.ui.fragment.home.HomeFragment;
 
 public class AddTodoFragment extends Fragment {
     private EditText todoNameEt, todoTimeEt, todoDurationEt, todoDetailEt;

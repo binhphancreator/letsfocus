@@ -1,4 +1,4 @@
-package com.app.letsfocus.ui.report1;
+package com.app.letsfocus.ui.fragment.report1;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,14 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.app.letsfocus.R;
-import com.app.letsfocus.ui.add_timetable.AddTimeTableFragment;
-import com.app.letsfocus.ui.report2.Report2Fragment;
+import com.app.letsfocus.ui.fragment.report2.Report2Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Report1Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Report1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

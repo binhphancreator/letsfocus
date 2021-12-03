@@ -42,7 +42,7 @@ public class MusicAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null){
-            view = layoutInflater.from(context).inflate(R.layout.card_music, viewGroup,false);
+            view = LayoutInflater.from(context).inflate(R.layout.card_music, viewGroup,false);
             TextView musicName = (TextView) view.findViewById(R.id.musicName);
             TextView singer = (TextView) view.findViewById(R.id.singer);
             ImageView musicImg = (ImageView) view.findViewById(R.id.musicImg);

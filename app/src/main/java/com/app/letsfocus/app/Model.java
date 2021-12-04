@@ -81,7 +81,7 @@ public abstract class Model extends SQLiteOpenHelper implements Cloneable{
     }
 
     public String toString() {
-        if(datarow != null) return "null";
+        if(datarow == null) return "null";
         return datarow.toString();
     }
 
@@ -93,5 +93,10 @@ public abstract class Model extends SQLiteOpenHelper implements Cloneable{
         } catch (CloneNotSupportedException ex) {
             return null;
         }
+    }
+
+    public void delete(Integer id) {
+        String deleteSql = String.format( "DELETE FROM %s WHERE ID = " + id, table());
+        db.execSQL(deleteSql);
     }
 }

@@ -108,9 +108,7 @@ public class AddTodoFragment extends Fragment {
                                 //Store hour and minute in string
                                 String time = hourTemp + ":" + minuteTemp;
                                 //Initialize 24 hours time format
-                                SimpleDateFormat f24Hours = new SimpleDateFormat(
-                                        "hh:mm"
-                                );
+                                SimpleDateFormat f24Hours = new SimpleDateFormat("hh:mm");
                                 if(isClock) {
                                     try {
                                         Date date = f24Hours.parse(time);

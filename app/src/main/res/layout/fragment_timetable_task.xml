@@ -20,7 +20,7 @@
 
     </TextView>
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/todayTimeTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Task"

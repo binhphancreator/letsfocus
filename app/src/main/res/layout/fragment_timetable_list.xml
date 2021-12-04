@@ -8,7 +8,7 @@
     tools:context=".ui.fragment.timetable.TimeTableListFragment">
 
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/todayTimeTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -28,7 +28,7 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_calendar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time" />
+        app:layout_constraintTop_toBottomOf="@+id/todayTimeTextView" />
 
     <GridView
         android:id="@+id/timetableGridView"

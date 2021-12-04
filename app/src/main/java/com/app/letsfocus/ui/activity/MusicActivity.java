@@ -42,10 +42,11 @@ public class MusicActivity extends AppCompatActivity {
     private void render()
     {
         listData = new ArrayList<>();
+        listData.add(new Music("Không có nhạc", "", R.drawable.nosong, 0));
         listData.add(new Music());
         listData.add(new Music("Bài số 2", "Unknown", R.drawable.song2, R.raw.song2));
-        listData.add(new Music());
-        listData.add(new Music());
+        listData.add(new Music("USSR Anthem", "Unknown", R.drawable.song3, R.raw.song3));
+        listData.add(new Music("German Soldier's Song", "Unknown", R.drawable.song4, R.raw.song4));
         gridView.setAdapter(new MusicAdapter(this ,listData));
     }
 

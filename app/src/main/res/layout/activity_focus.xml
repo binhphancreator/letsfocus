@@ -48,20 +48,21 @@
             android:src="@drawable/ic_round_library_music_24" />
 
         <TextView
+            android:id="@+id/musicFocus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dream On - ROGER TERRY" />
+            android:text="Chưa chọn nhạc" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/breakBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="47dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="@color/secondary_blue"
-        android:text="Break"
+        android:text="Start"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,5 +79,5 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/breakBtn" />
 </android.support.constraint.ConstraintLayout>

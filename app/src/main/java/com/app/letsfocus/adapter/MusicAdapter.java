@@ -11,15 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.letsfocus.R;
+import com.app.letsfocus.model.Music;
 
 import java.util.List;
 
 public class MusicAdapter extends BaseAdapter {
-    private List<Object> listData;
+    private List<Music> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public MusicAdapter(Context context, List<Object> listData) {
+    public MusicAdapter(Context context, List<Music> listData) {
         this.context = context;
         this.listData = listData;
     }
@@ -46,6 +47,12 @@ public class MusicAdapter extends BaseAdapter {
             TextView musicName = (TextView) view.findViewById(R.id.musicName);
             TextView singer = (TextView) view.findViewById(R.id.singer);
             ImageView musicImg = (ImageView) view.findViewById(R.id.musicImg);
+
+            Music music = listData.get(i);
+
+            musicName.setText(music.getMusicName());
+            singer.setText(music.getMusicSinger());
+            musicImg.setImageResource(music.getMusicImage());
         }
         return view;
     }

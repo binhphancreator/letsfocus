@@ -10,7 +10,7 @@ public class Music {
     public Music(){
         this.musicName = "Lỡ Yêu";
         this.musicSinger = "Imagin Dragon";
-        this.musicImage = R.drawable.loyeu;
+        this.musicImage = R.drawable.song1;
         this.musingPath = R.raw.loyeu;
     }
 

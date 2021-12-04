@@ -21,7 +21,7 @@ public class FocusActivity extends AppCompatActivity {
     private boolean isFocus, isStart;
     private int musicPath;
     private MediaPlayer mediaPlayer;
-    private String musicName;
+    private String musicName, oldMusicName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +56,10 @@ public class FocusActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1) {
-            if(true) {
-                musicName = data.getStringExtra("musicName");
-                musicPath = data.getIntExtra("musicPath",0);
-                musicFocusTv.setText(musicName);
-            }
+            oldMusicName = musicName;
+            musicName = data.getStringExtra("musicName");
+            musicPath = data.getIntExtra("musicPath",0);
+            musicFocusTv.setText(musicName);
             if(isFocus == true) {
                 isFocus = true;
                 breakBtn.setText("Break");
@@ -86,7 +85,13 @@ public class FocusActivity extends AppCompatActivity {
                     isFocus = true;
                     breakBtn.setText("Break");
                     if(musicPath != 0) {
-                        playMusic();
+                        if(musicName.equals(oldMusicName)) {
+                            resumeMusic();
+                        }
+                        else{
+                            playMusic();
+                            oldMusicName = musicName;
+                        }
                     }
                 }
                 else {
@@ -102,11 +107,15 @@ public class FocusActivity extends AppCompatActivity {
     {
         mediaPlayer = MediaPlayer.create(getBaseContext(),musicPath);
         mediaPlayer.start();
+        mediaPlayer.setLooping(true);
     }
     public void pauseMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
         }
+    }
+    private void resumeMusic() {
+        mediaPlayer.start();
     }
 
     private void stopPlayer() {
@@ -119,6 +128,12 @@ public class FocusActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        pauseMusic();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         stopPlayer();
     }
 }

@@ -12,7 +12,7 @@ public class ToDo extends Model {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE todo(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, time TEXT, duration INTEGER, detail TEXT)";
+        String createTable = "CREATE TABLE todo(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, time TEXT, duration TEXT, detail TEXT)";
         sqLiteDatabase.execSQL(createTable);
     }
 
@@ -24,5 +24,20 @@ public class ToDo extends Model {
     @Override
     public String primaryKey() {
         return "id";
+    }
+
+    public void updateTodo(Integer id, String nameTask, String timeStart, String timeDuration, String detail) {
+        String sqlUpdateTodo =  "UPDATE todo" +
+                                " SET name = '" + nameTask + "'," +
+                                " time = '" + timeStart + "'," +
+                                " duration = '" + timeDuration + "'," +
+                                " detail = '" + detail +
+                                "' WHERE" +
+                                " id = " + id;
+        db.execSQL(sqlUpdateTodo);
+    }
+    public ToDo getTodoById(Integer id) {
+        this.find(id);
+        return this;
     }
 }

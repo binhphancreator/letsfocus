@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -26,6 +29,8 @@ public class HomeFragment extends Fragment {
     private View root;
     private Button addToDoBtn;
     private ListView toDoList;
+    private int isSelected;
+    private List<Model> listData;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         bindComponent(inflater, container);
@@ -42,7 +47,7 @@ public class HomeFragment extends Fragment {
 
     private void renderToDoList() {
         toDoList = binding.toDoList;
-        List<Model> listData = new ToDo(getContext()).all();
+        listData = new ToDo(getContext()).all();
         ToDoListAdapter adapter = new ToDoListAdapter(getActivity(), listData);
         toDoList.setAdapter(adapter);
     }
@@ -60,11 +65,43 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), FocusActivity.class);
             startActivity(intent);
         });
+        toDoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                isSelected = position;
+                return false;
+            }
+        });
+        registerForContextMenu(toDoList);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
+        getActivity().getMenuInflater().inflate(R.menu.todo_context_menu,menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.delete) {
+            ToDo toDo = new ToDo(getContext());
+            toDo.delete(Integer.parseInt(listData.get(isSelected).get("id")));
+            renderToDoList();
+        }
+        else if(item.getItemId() == R.id.update) {
+            Bundle bundle = new Bundle();
+            bundle.putString("idTodo",listData.get(isSelected).get("id"));
+            AddTodoFragment addTodoFragment = new AddTodoFragment();
+            addTodoFragment.setArguments(bundle);
+            Helper.loadFragment(R.id.nav_host_fragment_activity_main, addTodoFragment, getFragmentManager());
+        }
+        return super.onContextItemSelected(item);
     }
 }

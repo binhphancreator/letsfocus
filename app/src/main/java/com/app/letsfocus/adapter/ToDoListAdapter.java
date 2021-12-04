@@ -32,7 +32,7 @@ public class ToDoListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return Long.parseLong(listData.get(i).get("id"));
     }
 
     @Override

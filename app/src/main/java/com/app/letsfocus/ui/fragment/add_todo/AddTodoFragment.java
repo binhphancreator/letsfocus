@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.app.letsfocus.R;
 import com.app.letsfocus.app.Helper;
@@ -32,16 +31,23 @@ public class AddTodoFragment extends Fragment {
     private TextView todoTimeTv, todoDurationTv;
     private Button saveTodoBtn;
     private View view;
-    private int timeStartHour, timeStartMinute, timeDurationHour, timeDurationMinute;
     private int hourTemp, minuteTemp;
+    private boolean isEdit;
+    private ToDo toDoTemp;
+    private int idTodoEdit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_add_todo, container, false);
         bindComponent();
-        registerEvent();
         setTimeEvent(todoTimeTv,true);
         setTimeEvent(todoDurationTv, false);
+        try {
+            getDataById();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        registerEvent();
         return view;
     }
 
@@ -56,18 +62,33 @@ public class AddTodoFragment extends Fragment {
 
     private  void registerEvent()
     {
-        saveTodoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("name", todoNameEt.getText().toString());
-                contentValues.put("time", todoTimeTv.getText().toString());
-                contentValues.put("duration", todoDurationTv.getText().toString());
-                contentValues.put("detail", todoDetailEt.getText().toString());
-                Model todoModel = new ToDo(getContext()).create(contentValues);
-                Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
-            }
-        });
+        if(isEdit) {
+            saveTodoBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String name = todoNameEt.getText().toString();
+                    String time = todoTimeTv.getText().toString();
+                    String duration = todoDurationTv.getText().toString();
+                    String detail = todoDetailEt.getText().toString();
+                    toDoTemp.updateTodo(idTodoEdit,name,time,duration,detail);
+                    Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                }
+            });
+        }
+        else {
+            saveTodoBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("name", todoNameEt.getText().toString());
+                    contentValues.put("time", todoTimeTv.getText().toString());
+                    contentValues.put("duration", todoDurationTv.getText().toString());
+                    contentValues.put("detail", todoDetailEt.getText().toString());
+                    Model todoModel = new ToDo(getContext()).create(contentValues);
+                    Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                }
+            });
+        }
     }
 
     private void setTimeEvent(TextView textView, boolean isClock)
@@ -104,15 +125,6 @@ public class AddTodoFragment extends Fragment {
                                     }
                                 }
                                 else {
-//                                    try {
-//                                        Date date = f24Hours.parse(time);
-//                                        Toast.makeText(getContext(), f24Hours.format(date), Toast.LENGTH_SHORT).show();
-//                                        String timeTemp = f24Hours.format(date);
-//                                        textView.setText(timeTemp);
-//                                    } catch (ParseException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                    textView.setText(time);
                                     textView.setText(String.format(Locale.getDefault(), "%02d:%02d", hourTemp, minuteTemp));
                                 }
                             }
@@ -126,5 +138,18 @@ public class AddTodoFragment extends Fragment {
                 timePickerDialog.show();
             }
         });
+    }
+
+    private void getDataById() {
+        Bundle bundle = this.getArguments();
+        String idTodo = bundle.getString("idTodo");
+        idTodoEdit = Integer.parseInt(idTodo);
+        toDoTemp = new ToDo(getContext());
+        toDoTemp = toDoTemp.getTodoById(Integer.parseInt(idTodo));
+        todoNameEt.setText(toDoTemp.get("name"));
+        todoTimeTv.setText(toDoTemp.get("time"));
+        todoDurationTv.setText(toDoTemp.get("duration"));
+        todoDetailEt.setText(toDoTemp.get("detail"));
+        isEdit=true;
     }
 }

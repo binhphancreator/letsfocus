@@ -1,10 +1,10 @@
 package com.app.letsfocus.ui.bottomsheet;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +12,19 @@ import android.widget.ListView;
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.RepeatTypeAdapter;
 import com.app.letsfocus.model.TypeRepeat;
+import com.app.letsfocus.ui.fragment.add_timetable.AddTimeTableViewModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TypeRepeatBottomSheetFragment extends BottomSheetDialogFragment {
-    private List<TypeRepeat> typeRepeatList = new ArrayList<>();
+    private AddTimeTableViewModel addTimeTableViewModel;
+    private RepeatTypeAdapter adapter;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_FRAME,0);
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme);
+        init();
     }
 
     @Nullable
@@ -32,11 +36,18 @@ public class TypeRepeatBottomSheetFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        typeRepeatList.add(new TypeRepeat(0, "Once", true));
-        typeRepeatList.add(new TypeRepeat(1, "Daily", false));
-        typeRepeatList.add(new TypeRepeat(2, "Weekly", false));
-        typeRepeatList.add(new TypeRepeat(3, "Monthly", false));
         ListView typeRepeatListView = view.findViewById(R.id.typeRepeatListView);
-        typeRepeatListView.setAdapter(new RepeatTypeAdapter(getContext(), typeRepeatList));
+        typeRepeatListView.setAdapter(adapter);
+        typeRepeatListView.setOnItemClickListener(((adapterView, viewSelected, i, l) -> {
+            addTimeTableViewModel.setTypeRepeatLiveData(i);
+            adapter.notifyDataSetChanged();
+            dismiss();
+        }));
+    }
+
+    private void init()
+    {
+        addTimeTableViewModel = new ViewModelProvider(requireActivity(), new ViewModelProvider.NewInstanceFactory()).get(AddTimeTableViewModel.class);
+        adapter = new RepeatTypeAdapter(getContext(), addTimeTableViewModel.getAllTypeRepeat());
     }
 }

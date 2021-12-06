@@ -9,25 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Model extends SQLiteOpenHelper implements Cloneable{
-    protected static final String DATABASE_NAME = "letsfocus";
-    protected SQLiteDatabase db;
+public abstract class Model implements Cloneable{
+    protected Database db;
     protected ContentValues datarow;
 
     public Model(Context context) {
-        super(context, DATABASE_NAME, null, 1);
-        db = getWritableDatabase();
-    }
-
-    @Override
-    public abstract void onCreate(SQLiteDatabase sqLiteDatabase);
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        String drop_table = String.format("DROP TABLE IF EXISTS %s", table());
-        sqLiteDatabase.execSQL(drop_table);
-
-        onCreate(sqLiteDatabase);
+        db = new Database(context);
     }
 
     public abstract String table();
@@ -35,14 +22,13 @@ public abstract class Model extends SQLiteOpenHelper implements Cloneable{
 
     public Model find(Object id)
     {
-        Cursor cursor = db.query(table(), null, String.format("%s = ?", primaryKey()), new String[]{String.valueOf(id)}, null, null, null);
-        List<ContentValues> datarows = convertCursorToContentValue(cursor);
+        List<ContentValues> datarows = db.select(table(), null, String.format("%s = ?", primaryKey()), new String[]{String.valueOf(id)}, null, null, null);
         datarow = datarows.size() > 0 ? datarows.get(0) : null;
         return this;
     }
 
     public Model create(ContentValues contentValues) {
-        long id = db.insert(table(), null, contentValues);
+        long id = db.insert(table(), contentValues);
         return find(id);
     }
 
@@ -50,26 +36,10 @@ public abstract class Model extends SQLiteOpenHelper implements Cloneable{
     {
         List<Model> list = new ArrayList<>();
         String selectAll = String.format("SELECT * FROM %s", table());
-        Cursor cursor = db.rawQuery(selectAll, null);
-        List<ContentValues> datarows = convertCursorToContentValue(cursor);
+        List<ContentValues> datarows = db.query(selectAll);
         datarows.stream().forEach( datarow -> {
             list.add(clone(datarow));
         });
-        return list;
-    }
-
-    private List<ContentValues> convertCursorToContentValue(Cursor cursor) {
-        List<ContentValues> list = new ArrayList<>();
-        if(cursor == null) return list;
-        int columnCount = cursor.getColumnCount();
-        while(cursor.moveToNext())
-        {
-            ContentValues contentValues = new ContentValues();
-            for(int i=0; i<columnCount;i++) {
-                contentValues.put(cursor.getColumnName(i), cursor.getString(i));
-            }
-            list.add(contentValues);
-        }
         return list;
     }
 

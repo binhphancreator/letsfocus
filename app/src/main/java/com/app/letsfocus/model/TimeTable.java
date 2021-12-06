@@ -11,12 +11,6 @@ public class TimeTable extends Model {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE timetable(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, start_time TEXT, end_time TEXT, repeat INTEGER)";
-        sqLiteDatabase.execSQL(createTable);
-    }
-
-    @Override
     public String table() {
         return "timetable";
     }

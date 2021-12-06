@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.letsfocus.R;
@@ -43,7 +42,7 @@ public class TimeTableAdapter extends BaseAdapter {
         if(view == null){
             view = layoutInflater.from(context).inflate(R.layout.card_timetable, viewGroup,false);
             TextView event = (TextView) view.findViewById(R.id.event);
-            TextView time = (TextView) view.findViewById(R.id.time);
+            TextView time = (TextView) view.findViewById(R.id.todayTimeTextView);
 
         }
         return null;

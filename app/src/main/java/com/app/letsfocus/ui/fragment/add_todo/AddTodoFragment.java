@@ -15,10 +15,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.app.letsfocus.R;
-import com.app.letsfocus.app.Helper;
-import com.app.letsfocus.app.Model;
+import com.app.letsfocus.core.Helper;
+import com.app.letsfocus.core.Model;
 import com.app.letsfocus.model.ToDo;
-import com.app.letsfocus.ui.activity.MainActivity;
 import com.app.letsfocus.ui.fragment.home.HomeFragment;
 
 import java.text.ParseException;
@@ -108,9 +107,7 @@ public class AddTodoFragment extends Fragment {
                                 //Store hour and minute in string
                                 String time = hourTemp + ":" + minuteTemp;
                                 //Initialize 24 hours time format
-                                SimpleDateFormat f24Hours = new SimpleDateFormat(
-                                        "hh:mm"
-                                );
+                                SimpleDateFormat f24Hours = new SimpleDateFormat("hh:mm");
                                 if(isClock) {
                                     try {
                                         Date date = f24Hours.parse(time);

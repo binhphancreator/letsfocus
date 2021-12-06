@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.app.letsfocus.R;
-import com.app.letsfocus.app.Helper;
+import com.app.letsfocus.core.Helper;
 import com.app.letsfocus.databinding.ActivityMainBinding;
 import com.app.letsfocus.ui.fragment.home.HomeFragment;
 import com.app.letsfocus.ui.fragment.profile.ProfileFragment;

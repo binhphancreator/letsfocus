@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.app.letsfocus.R;
-import com.app.letsfocus.app.Model;
+import com.app.letsfocus.core.Model;
 import java.util.List;
 
 public class ToDoListAdapter extends BaseAdapter {

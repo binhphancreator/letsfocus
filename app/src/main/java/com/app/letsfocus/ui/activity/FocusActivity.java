@@ -1,5 +1,6 @@
 package com.app.letsfocus.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.annotation.Nullable;
@@ -9,10 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.app.letsfocus.R;
-import com.app.letsfocus.model.Music;
 
 public class FocusActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
@@ -27,11 +25,16 @@ public class FocusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_focus);
+        init();
+        bindComponent();
+        registerEvent();
+    }
+
+    private void init()
+    {
         isFocus = false;
         musicName = "Chưa chọn nhạc";
         musicPath = 0;
-        bindComponent();
-        registerEvent();
     }
 
     private void bindComponent()
@@ -52,10 +55,11 @@ public class FocusActivity extends AppCompatActivity {
         });
         setBreakBtnEvent();
     }
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1) {
+        if(requestCode == 1 && resultCode == RESULT_OK) {
             oldMusicName = musicName;
             musicName = data.getStringExtra("musicName");
             musicPath = data.getIntExtra("musicPath",0);
@@ -81,7 +85,7 @@ public class FocusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isStart = true;
-                if(isFocus == false) {
+                if(!isFocus) {
                     isFocus = true;
                     breakBtn.setText("Break");
                     if(musicPath != 0) {
@@ -109,11 +113,13 @@ public class FocusActivity extends AppCompatActivity {
         mediaPlayer.start();
         mediaPlayer.setLooping(true);
     }
+
     public void pauseMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
         }
     }
+
     private void resumeMusic() {
         mediaPlayer.start();
     }

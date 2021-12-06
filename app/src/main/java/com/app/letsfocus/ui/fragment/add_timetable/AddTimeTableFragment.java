@@ -7,24 +7,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.app.letsfocus.R;
+import com.app.letsfocus.adapter.RepeatTypeAdapter;
+import com.app.letsfocus.model.TypeRepeat;
+import com.app.letsfocus.ui.bottomsheet.TypeRepeatBottomSheetFragment;
 import com.app.letsfocus.ui.fragment.timetable.TimeTableListFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddTimeTableFragment extends Fragment {
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_timetable_add_task, container, false);
-        Button report1_btn = (Button) view.findViewById(R.id.save_task_btn);
-        report1_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.nav_host_fragment_activity_main, new TimeTableListFragment());
-                fr.commit();
-            }
-        });
+    private View view;
+    private Button repeatBtn;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view =  inflater.inflate(R.layout.fragment_timetable_add_task, container, false);
+        bindComponent();
+        registerEvent();
         return view;
+    }
+
+    private void bindComponent()
+    {
+        repeatBtn = view.findViewById(R.id.repeat_btn);
+    }
+
+    private void registerEvent()
+    {
+        repeatBtn.setOnClickListener((v -> {
+            TypeRepeatBottomSheetFragment bottomSheetFragment = new TypeRepeatBottomSheetFragment();
+            bottomSheetFragment.show(getFragmentManager(), "Choose Type Repeat");
+        }));
     }
 }

@@ -83,20 +83,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/breakBtn" />
 
-    <ProgressBar
+    <com.app.letsfocus.core.ColorfulRingProgressView
         android:id="@+id/timer"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/circle_ring"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="20"
-        android:progressDrawable="@drawable/custom_circle_progressbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:bgColor="#EBF5FB"
+        app:fgColorEnd="#2E86C1"
+        app:fgColorStart="#AED6F1"
+        app:percent="75"
+        app:startAngle="0"
+        app:strokeWidth="20dp"
+    />
 </android.support.constraint.ConstraintLayout>

@@ -59,7 +59,7 @@ public class FocusActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && resultCode == RESULT_OK) {
+        if(requestCode == 1) {
             oldMusicName = musicName;
             musicName = data.getStringExtra("musicName");
             musicPath = data.getIntExtra("musicPath",0);

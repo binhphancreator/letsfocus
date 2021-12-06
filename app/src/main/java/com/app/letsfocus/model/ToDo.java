@@ -11,12 +11,6 @@ public class ToDo extends Model {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE todo(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, time TEXT, duration TEXT, detail TEXT)";
-        sqLiteDatabase.execSQL(createTable);
-    }
-
-    @Override
     public String table() {
         return "todo";
     }

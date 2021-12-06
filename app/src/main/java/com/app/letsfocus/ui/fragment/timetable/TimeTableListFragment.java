@@ -2,16 +2,14 @@ package com.app.letsfocus.ui.fragment.timetable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.app.letsfocus.R;
-import com.app.letsfocus.app.Helper;
+import com.app.letsfocus.core.Helper;
 import com.app.letsfocus.ui.fragment.add_timetable.AddTimeTableFragment;
 
 import java.text.DateFormat;

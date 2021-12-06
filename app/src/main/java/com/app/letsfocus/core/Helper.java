@@ -1,4 +1,4 @@
-package com.app.letsfocus.app;
+package com.app.letsfocus.core;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

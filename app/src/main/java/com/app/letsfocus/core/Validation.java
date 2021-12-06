@@ -1,4 +1,4 @@
-package com.app.letsfocus.app;
+package com.app.letsfocus.core;
 
 public class Validation {
     public static boolean require(String ...params) {

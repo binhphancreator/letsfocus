@@ -3,7 +3,7 @@ package com.app.letsfocus.model;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.app.letsfocus.app.Model;
+import com.app.letsfocus.core.Model;
 
 public class TimeTable extends Model {
     public TimeTable(Context context) {

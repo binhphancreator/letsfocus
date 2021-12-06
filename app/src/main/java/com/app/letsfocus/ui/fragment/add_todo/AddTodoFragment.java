@@ -15,10 +15,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.app.letsfocus.R;
-import com.app.letsfocus.app.Helper;
-import com.app.letsfocus.app.Model;
+import com.app.letsfocus.core.Helper;
+import com.app.letsfocus.core.Model;
 import com.app.letsfocus.model.ToDo;
-import com.app.letsfocus.ui.activity.MainActivity;
 import com.app.letsfocus.ui.fragment.home.HomeFragment;
 
 import java.text.ParseException;

@@ -49,7 +49,10 @@ public class RepeatTypeAdapter extends BaseAdapter {
             ImageView checkedIcon = view.findViewById(R.id.checkedIcon);
             TypeRepeat type = listData.get(i);
             typeRepeatTextView.setText(type.getName());
-            if(type.isActive()) checkedIcon.setImageResource(R.drawable.ic_check_lg);
+            if(type.isActive()) {
+                checkedIcon.setImageResource(R.drawable.ic_check_lg);
+                view.setBackgroundResource(R.color.blue_100);
+            }
         }
         return view;
     }

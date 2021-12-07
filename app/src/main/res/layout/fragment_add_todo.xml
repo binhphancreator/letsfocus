@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="52dp"
-            android:text="Duration(min)"
+            android:text="Duration"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -95,18 +95,16 @@
 
         <TextView
             android:id="@+id/todoDuration"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="40dp"
-            android:gravity="center_vertical"
+            android:ems="12"
             android:background="#F5F6FB"
+            android:gravity="center_vertical"
             android:minHeight="48dp"
             android:paddingHorizontal="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.81"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/todoTime"
             tools:ignore="SpeakableTextPresentCheck" />
 

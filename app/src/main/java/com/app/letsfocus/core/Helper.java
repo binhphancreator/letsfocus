@@ -41,9 +41,15 @@ public class Helper {
         minutes = minutes % 60;
 
         String hourStr, minuteStr, secondStr;
-        if(hours < 10) hourStr = String.format("0%s", hours); else hourStr = String.valueOf(hours);
-        if(minutes < 10) minuteStr = String.format("0%s", minutes); else minuteStr = String.valueOf(minutes);
-        if(seconds < 10) secondStr = String.format("0%s", seconds); else secondStr = String.valueOf(seconds);
+
+        if(hours < 10) hourStr = String.format("0%s", hours);
+        else hourStr = String.valueOf(hours);
+
+        if(minutes < 10) minuteStr = String.format("0%s", minutes);
+        else minuteStr = String.valueOf(minutes);
+
+        if(seconds < 10) secondStr = String.format("0%s", seconds);
+        else secondStr = String.valueOf(seconds);
 
         if(hours == 0) return String.format("%s : %s", minuteStr, secondStr);
         return String.format("%s : %s : %s", hourStr, minuteStr, secondStr);

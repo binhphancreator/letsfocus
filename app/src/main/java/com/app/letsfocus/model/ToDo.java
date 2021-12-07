@@ -28,7 +28,7 @@ public class ToDo extends Model {
                                 " detail = '" + detail +
                                 "' WHERE" +
                                 " id = " + id;
-        db.execSQL(sqlUpdateTodo);
+        db.getWritableDatabase().execSQL(sqlUpdateTodo);
     }
     public ToDo getTodoById(Integer id) {
         this.find(id);

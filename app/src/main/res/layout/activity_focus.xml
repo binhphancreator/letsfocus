@@ -37,11 +37,11 @@
         android:id="@+id/musicPlayerLinearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timer"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -83,8 +83,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/breakBtn" />
 
-    <com.app.letsfocus.core.ColorfulRingProgressView
-        android:id="@+id/timer"
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="16dp"
@@ -92,12 +93,35 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        app:bgColor="#EBF5FB"
-        app:fgColorEnd="#2E86C1"
-        app:fgColorStart="#AED6F1"
-        app:percent="75"
-        app:startAngle="0"
-        app:strokeWidth="20dp"
-    />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar">
+
+        <com.app.letsfocus.core.ColorfulRingProgressView
+            android:id="@+id/timerProgress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:bgColor="#EBF5FB"
+            app:fgColorEnd="#2E86C1"
+            app:fgColorStart="#AED6F1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:percent="75"
+            app:startAngle="0"
+            app:strokeWidth="20dp" />
+
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_light"
+            android:text="10 : 00"
+            android:textAlignment="center"
+            android:textColor="#1C2833"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/timerProgress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

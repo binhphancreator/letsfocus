@@ -63,7 +63,7 @@ public class MusicActivity extends AppCompatActivity {
     private void backToFocus() {
         intent.putExtra("musicName", musicName);
         intent.putExtra("musicPath", musicPath);
-        setResult(1, intent);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

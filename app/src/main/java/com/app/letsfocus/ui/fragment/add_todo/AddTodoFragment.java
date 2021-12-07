@@ -13,10 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.app.letsfocus.R;
 import com.app.letsfocus.core.Helper;
 import com.app.letsfocus.core.Model;
+import com.app.letsfocus.core.Validation;
 import com.app.letsfocus.model.ToDo;
 import com.app.letsfocus.ui.fragment.home.HomeFragment;
 
@@ -69,8 +71,13 @@ public class AddTodoFragment extends Fragment {
                     String time = todoTimeTv.getText().toString();
                     String duration = todoDurationTv.getText().toString();
                     String detail = todoDetailEt.getText().toString();
-                    toDoTemp.updateTodo(idTodoEdit,name,time,duration,detail);
-                    Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                    if (Validation.require(name, time, duration)) {
+                        toDoTemp.updateTodo(idTodoEdit,name,time,duration,detail);
+                        Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                    }
+                    else {
+                        Toast.makeText(getContext(), "Không được bỏ trống", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -78,13 +85,22 @@ public class AddTodoFragment extends Fragment {
             saveTodoBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String name = todoNameEt.getText().toString();
+                    String time = todoTimeTv.getText().toString();
+                    String duration = todoDurationTv.getText().toString();
+                    String detail = todoDetailEt.getText().toString();
                     ContentValues contentValues = new ContentValues();
-                    contentValues.put("name", todoNameEt.getText().toString());
-                    contentValues.put("time", todoTimeTv.getText().toString());
-                    contentValues.put("duration", todoDurationTv.getText().toString());
-                    contentValues.put("detail", todoDetailEt.getText().toString());
-                    Model todoModel = new ToDo(getContext()).create(contentValues);
-                    Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                    contentValues.put("name", name);
+                    contentValues.put("time", time);
+                    contentValues.put("duration", duration);
+                    contentValues.put("detail", detail);
+                    if (Validation.require(name, time, duration)) {
+                        Model todoModel = new ToDo(getContext()).create(contentValues);
+                        Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                    }
+                    else {
+                        Toast.makeText(getContext(), "Không được bỏ trống", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

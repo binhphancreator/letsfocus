@@ -66,6 +66,6 @@ public abstract class Model implements Cloneable{
 
     public void delete(Integer id) {
         String deleteSql = String.format( "DELETE FROM %s WHERE ID = " + id, table());
-        db.execSQL(deleteSql);
+        db.getWritableDatabase().execSQL(deleteSql);
     }
 }

@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.app.letsfocus.ui.activity.FocusActivity;
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.ToDoListAdapter;
@@ -42,7 +40,7 @@ public class HomeFragment extends Fragment {
     private void bindComponent(@NonNull LayoutInflater inflater, ViewGroup container) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        addToDoBtn = (Button) root.findViewById(R.id.add_todo_btn);
+        addToDoBtn = root.findViewById(R.id.add_todo_btn);
     }
 
     private void renderToDoList() {
@@ -61,17 +59,17 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        toDoList.setOnItemClickListener((parent, view, position, id) -> {
+        toDoList.setOnItemClickListener((adapterView, view, position, id) -> {
             Intent intent = new Intent(getActivity(), FocusActivity.class);
+            intent.putExtra("todoId", String.valueOf(id));
             startActivity(intent);
         });
-        toDoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                isSelected = position;
-                return false;
-            }
+
+        toDoList.setOnItemLongClickListener((adapterView, view, position, id) -> {
+            isSelected = position;
+            return false;
         });
+
         registerForContextMenu(toDoList);
     }
 
@@ -82,8 +80,8 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
         getActivity().getMenuInflater().inflate(R.menu.todo_context_menu,menu);
         super.onCreateContextMenu(menu, v, menuInfo);
     }

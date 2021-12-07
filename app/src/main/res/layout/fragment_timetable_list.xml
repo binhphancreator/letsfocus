@@ -8,7 +8,7 @@
     tools:context=".ui.fragment.timetable.TimeTableListFragment">
 
     <TextView
-        android:id="@+id/todayTimeTextView"
+        android:id="@+id/timeTaskItemTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -21,28 +21,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/calendarBtn"
         android:layout_width="32dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_calendar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todayTimeTextView" />
-
-    <GridView
-        android:id="@+id/timetableGridView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:numColumns="1"
-        android:stretchMode="columnWidth"
-        app:layout_constraintBottom_toTopOf="@+id/add_timetable_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/timeTaskItemTv" />
 
     <Button
         android:id="@+id/add_timetable_btn"
@@ -54,4 +40,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <ListView
+        android:id="@+id/timetableLv"
+        android:layout_width="409dp"
+        android:layout_height="576dp"
+        android:layout_marginTop="20dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarBtn" />
 </android.support.constraint.ConstraintLayout>

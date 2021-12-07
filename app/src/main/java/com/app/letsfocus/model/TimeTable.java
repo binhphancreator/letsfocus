@@ -19,4 +19,19 @@ public class TimeTable extends Model {
     public String primaryKey() {
         return "id";
     }
+
+    public void updateTimeTable(Integer id, String nameTask, String timeStart, String timeEnd, Integer repeat) {
+        String sqlUpdateTimeTable =  "UPDATE timetable" +
+                " SET name = '" + nameTask + "'," +
+                " start_time = '" + timeStart + "'," +
+                " end_time = '" + timeEnd + "'," +
+                " repeat = " + repeat +
+                " WHERE" +
+                " id = " + id;
+        db.getWritableDatabase().execSQL(sqlUpdateTimeTable);
+    }
+    public TimeTable getTimeTableById(Integer id) {
+        this.find(id);
+        return this;
+    }
 }

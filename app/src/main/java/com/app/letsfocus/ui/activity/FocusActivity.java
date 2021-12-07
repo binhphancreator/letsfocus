@@ -1,7 +1,9 @@
 package com.app.letsfocus.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.app.letsfocus.R;
-import com.app.letsfocus.model.Music;
+import com.app.letsfocus.core.ColorfulRingProgressView;
+import com.app.letsfocus.core.Helper;
+import com.app.letsfocus.core.Model;
+import com.app.letsfocus.model.ToDo;
 
 public class FocusActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
@@ -22,20 +25,54 @@ public class FocusActivity extends AppCompatActivity {
     private int musicPath;
     private MediaPlayer mediaPlayer;
     private String musicName, oldMusicName;
+    private ColorfulRingProgressView timerProgress;
+    private TextView timerTextView;
+    private long totalTime;
+    private long timeTicked;
+    private CountDownTimer countDownTimer;
+    private Model toDoModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_focus);
+        bindComponent();
+        init();
+        registerEvent();
+    }
+
+    private void init()
+    {
         isFocus = false;
         musicName = "Chưa chọn nhạc";
         musicPath = 0;
-        bindComponent();
-        registerEvent();
+        totalTime = 20000;
+        timeTicked = 0;
+        timerProgress.setPercent(0);
+        toDoModel = new ToDo(this).find(getIntent().getStringExtra("todoId"));
+        totalTime = Helper.convertTimeStringToSecond(toDoModel.get("duration"));
+        timerTextView.setText(toDoModel.get("duration"));
+        countDownTimer = new CountDownTimer(totalTime * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeTicked += 1;
+                timerProgress.setPercent(timeTicked * 100 / totalTime);
+                timerTextView.setText(Helper.convertSecondToTimeString(totalTime - timeTicked));
+            }
+
+            @Override
+            public void onFinish() {
+                timerProgress.setPercent(100);
+                timerProgress.stopAnimateIndeterminate();
+                timerTextView.setText(Helper.convertSecondToTimeString(0));
+            }
+        };
     }
 
     private void bindComponent()
     {
+        timerProgress = findViewById(R.id.timerProgress);
+        timerTextView = findViewById(R.id.timerTextView);
         linearLayout = findViewById(R.id.musicPlayerLinearLayout);
         musicFocusTv = findViewById(R.id.musicFocus);
         breakBtn = findViewById(R.id.breakBtn);
@@ -52,6 +89,8 @@ public class FocusActivity extends AppCompatActivity {
         });
         setBreakBtnEvent();
     }
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -60,12 +99,12 @@ public class FocusActivity extends AppCompatActivity {
             musicName = data.getStringExtra("musicName");
             musicPath = data.getIntExtra("musicPath",0);
             musicFocusTv.setText(musicName);
-            if(isFocus == true) {
-                isFocus = true;
+            if(isFocus) {
+                isFocus = false;
                 breakBtn.setText("Break");
             }
             else {
-                isFocus = false;
+                isFocus = true;
                 if(isStart) {
                     breakBtn.setText("Continue");
                 }
@@ -81,8 +120,10 @@ public class FocusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isStart = true;
-                if(isFocus == false) {
+                if(!isFocus) {
+                    timerProgress.animateIndeterminate();
                     isFocus = true;
+                    countDownTimer.start();
                     breakBtn.setText("Break");
                     if(musicPath != 0) {
                         if(musicName.equals(oldMusicName)) {
@@ -95,7 +136,9 @@ public class FocusActivity extends AppCompatActivity {
                     }
                 }
                 else {
+                    timerProgress.stopAnimateIndeterminate();
                     isFocus = false;
+                    countDownTimer.cancel();
                     breakBtn.setText("Continue");
                     pauseMusic();
                 }
@@ -109,11 +152,13 @@ public class FocusActivity extends AppCompatActivity {
         mediaPlayer.start();
         mediaPlayer.setLooping(true);
     }
+
     public void pauseMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
         }
     }
+
     private void resumeMusic() {
         mediaPlayer.start();
     }

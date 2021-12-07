@@ -32,28 +32,30 @@
         <entry key="..\:/Project/letsfocus/app/src/main/res/layout/fragment_timetable_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/layout/report_parent_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Project/letsfocus/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/activity_focus.xml" value="0.4" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/activity_login.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/card_music.xml" value="0.1671875" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/card_task.xml" value="0.25" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/card_timetable.xml" value="0.25" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/card_todo_list.xml" value="0.20185185185185187" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/fragment_add_todo.xml" value="0.4" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/fragment_timetable_add_task.xml" value="0.25" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/fragment_timetable_details.xml" value="0.25" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/fragment_timetable_list.xml" value="0.176" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/layout/fragment_timetable_task.xml" value="0.4" />
+        <entry key="..\:/Users/tranl/Code/letsfocus/app/src/main/res/menu/todo_context_menu.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/custom_background_radius.xml" value="0.371875" />
-        <entry key="app/src/main/res/drawable/ic_check_lg.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/roundbutton.xml" value="0.371875" />
-        <entry key="app/src/main/res/drawable/shape_radius_md.xml" value="0.287962962962963" />
-        <entry key="app/src/main/res/layout/activity_focus.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_focus.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_music.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/bottomsheet_type_repeat.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/card_music.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/card_task.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/card_timetable.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/card_todo_list.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/card_type_repeat.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_add_to_do_list.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_add_todo.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/fragment_item_list_dialog_list_dialog_item.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_music.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/fragment_timetable_add_task.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_timetable_details.xml" value="0.17299898682877407" />
-        <entry key="app/src/main/res/layout/fragment_timetable_list.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_type_repeat_dialog_list_dialog.xml" value="0.35572916666666665" />
       </map>
     </option>
   </component>
@@ -62,12 +64,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.5" />
-      </ProjectState>
-    </option>
   </component>
 </project>

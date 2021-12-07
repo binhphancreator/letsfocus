@@ -8,43 +8,49 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.app.letsfocus.R;
+import com.app.letsfocus.core.Model;
+import com.app.letsfocus.model.TimeTable;
 
 import java.util.List;
 
 public class TimeTableAdapter extends BaseAdapter {
 
-    private List<Object> listData;
+    private List<Model> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public TimeTableAdapter(Context context, List<Object> listData) {
+    public TimeTableAdapter(Context context, List<Model> listData) {
         this.context = context;
         this.listData = listData;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return listData.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Model getItem(int i) {
+        return listData.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return  Long.parseLong(listData.get(i).get("id"));
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null){
             view = layoutInflater.from(context).inflate(R.layout.card_timetable, viewGroup,false);
-            TextView event = (TextView) view.findViewById(R.id.event);
-            TextView time = (TextView) view.findViewById(R.id.todayTimeTextView);
+            Model timeTableModel = getItem(i);
+            TextView nameTaskItemTv = view.findViewById(R.id.nameTaskItemTv);
+            TextView timeTaskItemTv = view.findViewById(R.id.timeTaskItemTv);
 
+            nameTaskItemTv.setText(timeTableModel.get("name"));
+            timeTaskItemTv.setText(timeTableModel.get("start_time"));
         }
-        return null;
+        return view;
     }
+
 }

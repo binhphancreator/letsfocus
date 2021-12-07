@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200px"
-    android:background="@drawable/custom_input"
-    >
+    android:background="@drawable/custom_input">
 
     <ImageView
         android:id="@+id/imageView"
@@ -18,7 +17,7 @@
         app:srcCompat="@drawable/ic_ring_circled" />
 
     <TextView
-        android:id="@+id/event"
+        android:id="@+id/nameTaskItemTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
@@ -29,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/todayTimeTextView"
+        android:id="@+id/timeTaskItemTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"

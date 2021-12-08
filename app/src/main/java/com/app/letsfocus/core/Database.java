@@ -21,7 +21,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
-        sqLiteDatabase.execSQL("CREATE TABLE timetable(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, start_time TEXT, end_time TEXT, repeat INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE timetable(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, start_time TEXT, end_time TEXT, repeat INTEGER, date TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE todo(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, time TEXT, duration TEXT, detail TEXT)");
     }
 

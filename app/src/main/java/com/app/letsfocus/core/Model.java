@@ -54,7 +54,7 @@ public abstract class Model implements Cloneable{
         return datarow.toString();
     }
 
-    private Model clone(ContentValues datarow){
+    protected Model clone(ContentValues datarow){
         try {
             Model model = (Model) super.clone();
             model.datarow = datarow;

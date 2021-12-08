@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activity.MainActivity">
+        android:paddingBottom="32dp"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/nameofTaskTextView"
@@ -135,20 +136,53 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailTextView" />
 
+        <TextView
+            android:id="@+id/chooseDaysTv"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_input"
+            android:gravity="center_vertical"
+            android:hint="Choose days"
+            android:paddingLeft="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="17sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repeat_btn" />
+
         <Button
             android:id="@+id/saveTaskBtn"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="108dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/custom_btn"
             android:text="Save"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.353"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/repeat_btn" />
+
+        <TextView
+            android:id="@+id/clearDayTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:text="Clear"
+            android:textColor="@color/primary_blue"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chooseDaysTv" />
 
 
     </android.support.constraint.ConstraintLayout>

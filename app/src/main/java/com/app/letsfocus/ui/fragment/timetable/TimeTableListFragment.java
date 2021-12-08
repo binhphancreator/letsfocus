@@ -1,8 +1,6 @@
 package com.app.letsfocus.ui.fragment.timetable;
 
 import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -37,23 +35,15 @@ public class TimeTableListFragment extends Fragment {
                 fr.commit();
             }
         });
-
-        Button push_btn = view.findViewById(R.id.push_notify);
-        push_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendNotification();
-            }
-        });
-
         return view;
     }
 
     private void sendNotification(){
+//        Bitmap img = BitmapFactory.decodeResource(getResources(),R.drawable.bell2);
         Notification notification = new NotificationCompat.Builder(getContext(), MyNotificationChannel.CHANNEL_ID_1)
                 .setContentTitle("Todo list")
-                .setContentText("Còn 5 phút nữa đến giờ chạy bộ rồi")
-                .setSmallIcon(R.drawable.ic_ring_circled)
+                .setContentText("Chuẩn bị đến giờ chạy bộ rồi ")
+                .setSmallIcon(R.drawable.ic_baseline_access_alarm_24)
                 .build();
 
         NotificationManagerCompat notificationManagerCompat =NotificationManagerCompat.from(getContext());

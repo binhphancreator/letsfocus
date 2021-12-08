@@ -7,10 +7,13 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.app.letsfocus.R;
 import com.app.letsfocus.core.ColorfulRingProgressView;
 import com.app.letsfocus.core.Helper;
@@ -20,7 +23,7 @@ import com.app.letsfocus.model.ToDo;
 public class FocusActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private TextView musicFocusTv;
-    private Button breakBtn;
+    private Button breakBtn, finishBtn;
     private boolean isFocus, isStart;
     private int musicPath;
     private MediaPlayer mediaPlayer;
@@ -58,6 +61,9 @@ public class FocusActivity extends AppCompatActivity {
                 timeTicked += 1;
                 timerProgress.setPercent(timeTicked * 100 / totalTime);
                 timerTextView.setText(Helper.convertSecondToTimeString(totalTime - timeTicked));
+                if((totalTime - timeTicked) < 1) {
+                    pauseFocus();
+                }
             }
 
             @Override
@@ -65,6 +71,7 @@ public class FocusActivity extends AppCompatActivity {
                 timerProgress.setPercent(100);
                 timerProgress.stopAnimateIndeterminate();
                 timerTextView.setText(Helper.convertSecondToTimeString(0));
+                pauseMusic();
             }
         };
     }
@@ -76,6 +83,7 @@ public class FocusActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.musicPlayerLinearLayout);
         musicFocusTv = findViewById(R.id.musicFocus);
         breakBtn = findViewById(R.id.breakBtn);
+        finishBtn = findViewById(R.id.finishBtn);
     }
 
     private void registerEvent()
@@ -86,6 +94,12 @@ public class FocusActivity extends AppCompatActivity {
             intent.putExtra("musicName", musicName);
             intent.putExtra("musicPath", musicPath);
             startActivityForResult(intent, 1);
+        });
+        finishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
         setBreakBtnEvent();
     }
@@ -104,7 +118,6 @@ public class FocusActivity extends AppCompatActivity {
                 breakBtn.setText("Break");
             }
             else {
-                isFocus = true;
                 if(isStart) {
                     breakBtn.setText("Continue");
                 }
@@ -120,6 +133,10 @@ public class FocusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isStart = true;
+                if((totalTime - timeTicked) < 1) {
+                    Toast.makeText(getBaseContext(), "Over time!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(!isFocus) {
                     timerProgress.animateIndeterminate();
                     isFocus = true;
@@ -136,11 +153,7 @@ public class FocusActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    timerProgress.stopAnimateIndeterminate();
-                    isFocus = false;
-                    countDownTimer.cancel();
-                    breakBtn.setText("Continue");
-                    pauseMusic();
+                    pauseFocus();
                 }
             }
         });
@@ -170,10 +183,18 @@ public class FocusActivity extends AppCompatActivity {
         }
     }
 
+    private void pauseFocus() {
+        pauseMusic();
+        timerProgress.stopAnimateIndeterminate();
+        isFocus = false;
+        countDownTimer.cancel();
+        breakBtn.setText("Continue");
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
-        pauseMusic();
+        pauseFocus();
     }
 
     @Override

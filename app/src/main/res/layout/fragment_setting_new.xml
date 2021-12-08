@@ -6,29 +6,17 @@
     android:layout_height="match_parent"
     >
 
-    <TextView
-        android:id="@+id/User_Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="User Name"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <LinearLayout
         android:id="@+id/infor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/User_Name">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -160,7 +148,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:padding="15dp"
-             />
+            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/setting_sound"
@@ -172,17 +160,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/setting_Notification"
         >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:text="Sound and Vibration"
-        android:layout_marginRight="60dp"
-        android:gravity="fill_vertical"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="Sound and Vibration"
+            android:layout_marginRight="60dp"
+            android:gravity="fill_vertical"
+            />
 
         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_action_arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/setting_Theme"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="24dp"
+        android:divider="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_sound"
+        >
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="60dp"
+            android:gravity="fill_vertical"
+            android:text="Theme"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -197,7 +214,7 @@
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setting_sound"
+        app:layout_constraintTop_toBottomOf="@id/setting_Theme"
         >
         <TextView
 
@@ -218,17 +235,52 @@
             android:padding="15dp"
             android:src="@drawable/ic_action_arrow" />
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:text="Info"
+        android:textColor="#1F88C1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_permission"></TextView>
+    <RelativeLayout
+        android:id="@+id/setting_infor"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="24dp"
+        android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
-    <?xml version="1.0" encoding="utf-8"?>
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        >
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="Current Version"
+            android:layout_marginRight="60dp"
+            android:gravity="fill_vertical"
+            />
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="15dp"
+            android:layout_alignParentRight="true"
+            android:text="1.0"
+            android:textSize="18sp"
+            android:gravity="fill_vertical"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </RelativeLayout>
+
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.app.letsfocus.R;
+import com.app.letsfocus.ui.fragment.app_usage.AppUsageFragment;
 import com.app.letsfocus.ui.fragment.report2.Report2Fragment;
 
 public class Report1Fragment extends Fragment {
@@ -21,7 +22,7 @@ public class Report1Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.nav_host_fragment_activity_main, new Report2Fragment());
+                fr.replace(R.id.nav_host_fragment_activity_main, new AppUsageFragment());
                 fr.commit();
             }
         });

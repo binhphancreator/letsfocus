@@ -11,6 +11,7 @@ import com.app.letsfocus.databinding.ActivityMainBinding;
 import com.app.letsfocus.ui.fragment.home.HomeFragment;
 import com.app.letsfocus.ui.fragment.profile.ProfileFragment;
 import com.app.letsfocus.ui.fragment.report1.Report1Fragment;
+import com.app.letsfocus.ui.fragment.setting.SettingFragment;
 import com.app.letsfocus.ui.fragment.timetable.TimeTableListFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             } else if(id == R.id.navigation_report) {
                 loadFragment(new Report1Fragment());
             } else if(id==R.id.navigation_profile) {
-                loadFragment(new ProfileFragment());
+                loadFragment(new SettingFragment());
             }
             return true;
         });

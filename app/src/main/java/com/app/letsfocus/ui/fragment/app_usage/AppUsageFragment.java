@@ -152,8 +152,6 @@ public class AppUsageFragment extends Fragment {
         long totalTime = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             totalTime = usageStatsList.stream().map(UsageStats::getTotalTimeInForeground).mapToLong(Long::longValue).sum();
-            string_totalTime = getDurationBreakdown(totalTime);
-            Log.w("noa", string_totalTime);
         }
 
         //fill the appsList

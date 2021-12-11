@@ -55,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
         String a="";
         for (Model time: listTime
              ) {
+                a+= time.get("time");
 
         }
+        Log.e("check2",a);
         startAlarm(1,2);
     }
 

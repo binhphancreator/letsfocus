@@ -136,8 +136,8 @@ public class AddTimeTableFragment extends Fragment {
                 }
             }
         });
-        setTimeEvent(timeStartTaskTv, true);
-        setTimeEvent(timeEndTaskTv, true);
+        setTimeEvent(timeStartTaskTv, false);
+        setTimeEvent(timeEndTaskTv, false);
     }
 
     private void setTimeEvent(TextView textView, boolean isClock)

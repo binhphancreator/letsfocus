@@ -3,8 +3,10 @@ package com.app.letsfocus.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +36,7 @@ public class FocusActivity extends AppCompatActivity {
     private long timeTicked;
     private CountDownTimer countDownTimer;
     private Model toDoModel;
+    private ToDo toDoTmp = new ToDo(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +59,14 @@ public class FocusActivity extends AppCompatActivity {
         totalTime = Helper.convertTimeStringToSecond(toDoModel.get("duration"));
         timerTextView.setText(toDoModel.get("duration"));
         countDownTimer = new CountDownTimer(totalTime * 1000, 1000) {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onTick(long millisUntilFinished) {
                 timeTicked += 1;
                 timerProgress.setPercent(timeTicked * 100 / totalTime);
                 timerTextView.setText(Helper.convertSecondToTimeString(totalTime - timeTicked));
                 if((totalTime - timeTicked) < 1) {
+                    toDoTmp.increaseTodo();
                     pauseFocus();
                 }
             }
@@ -96,8 +101,10 @@ public class FocusActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         });
         finishBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                toDoTmp.increaseTodo();
                 finish();
             }
         });

@@ -23,6 +23,7 @@ public class Database extends SQLiteOpenHelper {
     {
         sqLiteDatabase.execSQL("CREATE TABLE timetable(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, start_time TEXT, end_time TEXT, repeat INTEGER, date TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE todo(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, time TEXT, duration TEXT, detail TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE todobyday(date TEXT UNIQUE, num_todo INTERGER)");
     }
 
     @Override

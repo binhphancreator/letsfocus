@@ -29,6 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.FocusActivity" />
+        <receiver android:name=".core.RemiderBroadcast"/>
     </application>
 
 </manifest>

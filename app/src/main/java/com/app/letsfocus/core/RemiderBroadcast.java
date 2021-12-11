@@ -20,8 +20,8 @@ public class RemiderBroadcast extends BroadcastReceiver {
     private void sendNotification(Context context){
         Notification notification = new NotificationCompat.Builder(context, NoticeChannel.CHANNEL_ID_1)
                 .setContentTitle("Todo list")
-                .setContentText("Chuẩn bị đến giờ chạy bộ rồi ")
-                .setSmallIcon(R.drawable.ic_calendar)
+                .setContentText("Có công việc cần làm sau 5 phút nữa, check app ngay nhé!")
+                .setSmallIcon(R.drawable.ic_alarm_24)
                 .build();
 
         NotificationManagerCompat notificationManagerCompat =NotificationManagerCompat.from(context);

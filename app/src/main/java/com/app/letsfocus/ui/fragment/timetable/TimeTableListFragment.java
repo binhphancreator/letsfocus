@@ -1,22 +1,15 @@
 package com.app.letsfocus.ui.fragment.timetable;
 
-import static android.content.Context.ALARM_SERVICE;
-import static android.support.v4.content.ContextCompat.getSystemService;
+import static androidx.core.content.ContextCompat.getSystemService;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import androidx.annotation.NonNull;
+
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -33,16 +26,12 @@ import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.TimeTableAdapter;
 import com.app.letsfocus.core.Helper;
 import com.app.letsfocus.core.Model;
-import com.app.letsfocus.core.RemiderBroadcast;
 import com.app.letsfocus.model.TimeTable;
-import com.app.letsfocus.model.ToDo;
-import com.app.letsfocus.ui.activity.MainActivity;
 import com.app.letsfocus.ui.fragment.add_timetable.AddTimeTableFragment;
 import com.app.letsfocus.ui.fragment.all_timetable.AllTimeTableFragment;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

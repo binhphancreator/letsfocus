@@ -1,21 +1,16 @@
 package com.app.letsfocus.ui.fragment.setting;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.app.letsfocus.R;
-import com.app.letsfocus.adapter.ReportAdapter;
-
-import java.util.ArrayList;
 
 public class SettingSoundFragment extends Fragment {
 

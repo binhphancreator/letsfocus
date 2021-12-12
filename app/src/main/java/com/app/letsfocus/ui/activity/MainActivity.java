@@ -8,11 +8,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
 import com.app.letsfocus.R;
 import com.app.letsfocus.core.Helper;
 import com.app.letsfocus.core.Model;

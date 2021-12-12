@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -34,6 +34,14 @@
         android:layout_height="wrap_content"
         android:text="Show My Apps Usage" />
 
+
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/report_piechart"/>
+
     <TextView
         android:id="@+id/usage_tv"
         android:visibility="gone"
@@ -48,4 +56,13 @@
         android:id="@+id/apps_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/usage_tv_1"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:text="Your Apps Usage For Last 24 Hours" />
 </LinearLayout>

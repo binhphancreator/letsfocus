@@ -10,11 +10,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,6 +29,13 @@ import android.widget.TextView;
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.AppAdapter;
 import com.app.letsfocus.model.App;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,8 +49,11 @@ import java.util.stream.Collectors;
 public class AppActivity extends AppCompatActivity {
 
     Button enableBtn, showBtn;
-    TextView permissionDescriptionTv, usageTv;
+    TextView permissionDescriptionTv, usageTv, tv1;
     ListView appsList;
+    PieChart chart;
+    String title[] ={"part1","part2","part3","part4","part5"};
+    int num[] = {96, 80, 52, 44, 86};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +65,32 @@ public class AppActivity extends AppCompatActivity {
         permissionDescriptionTv =findViewById(R.id.permission_description_tv);
         usageTv =  findViewById(R.id.usage_tv);
         appsList =  findViewById(R.id.apps_list);
+        chart = findViewById(R.id.report_piechart);
+        tv1 = findViewById(R.id.usage_tv_1);
+
+        //set  up chart
+        chart.setExtraOffsets(5, 10, 5, 5);
+        chart.setUsePercentValues(true);
+        chart.getDescription().setEnabled(false);
+        chart.setDragDecelerationFrictionCoef(0.8f);
+        chart.setCenterTextTypeface(Typeface.DEFAULT);
+        chart.setCenterText(generateCenterSpannableText());
+        chart.setDrawHoleEnabled(true);
+        chart.setHoleColor(Color.WHITE);
+        chart.setTransparentCircleColor(Color.WHITE);
+        chart.setTransparentCircleAlpha(110);
+        chart.setHoleRadius(58f);
+        chart.setTransparentCircleRadius(61f);
+        chart.setDrawCenterText(true);
+        chart.setRotationAngle(0);
+        // enable rotation of the chart by touch
+        chart.setRotationEnabled(true);
+        chart.setHighlightPerTapEnabled(true);
+        chart.animateY(1400, Easing.EaseInOutQuad);
+
 
         this.loadStatistics();
+        setData();
     }
 
 
@@ -201,6 +241,7 @@ public class AppActivity extends AppCompatActivity {
         showBtn.setVisibility(View.GONE);
         usageTv.setVisibility(View.GONE);
         appsList.setVisibility(View.GONE);
+        chart.setVisibility(View.GONE);
 
     }
 
@@ -211,6 +252,78 @@ public class AppActivity extends AppCompatActivity {
         showBtn.setVisibility(View.GONE);
         usageTv.setVisibility(View.VISIBLE);
         appsList.setVisibility(View.VISIBLE);
+        chart.setVisibility(View.VISIBLE);
+        tv1.setVisibility(View.VISIBLE);
 
+    }
+
+    private SpannableString generateCenterSpannableText() {
+
+        SpannableString s = new SpannableString("App usage today");
+        s.setSpan(new RelativeSizeSpan(1.5f), 0, 14, 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
+        s.setSpan(new RelativeSizeSpan(.65f), 14, s.length() - 15, 0);
+        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
+        return s;
+    }
+
+    private void setData() {
+
+        ArrayList<PieEntry> entries = new ArrayList<>();
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        for (int i = 0; i < 5; i++) {
+            entries.add(new PieEntry((float) num[i], title[i]));
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+
+        dataSet.setValueLinePart1OffsetPercentage(80.f);
+        dataSet.setValueLinePart1Length(0.2f);
+        dataSet.setValueLinePart2Length(0.4f);
+
+        //dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.BLACK);
+        chart.setData(data);
+
+        // undo all highlights
+        chart.highlightValues(null);
+
+        chart.invalidate();
     }
 }

@@ -24,8 +24,8 @@
         tools:layout="@layout/fragment_report1" />
 
     <fragment
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_setting"
         android:name="com.app.letsfocus.ui.fragment.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_setting_new" />
 </navigation>

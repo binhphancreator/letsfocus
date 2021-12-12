@@ -41,7 +41,7 @@ public class AddTodoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_add_todo, container, false);
         bindComponent();
-        setTimeEvent(todoTimeTv,true);
+        setTimeEvent(todoTimeTv,false);
         setTimeEvent(todoDurationTv, false);
         try {
             getDataById();

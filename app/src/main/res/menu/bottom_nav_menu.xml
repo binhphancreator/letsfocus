@@ -17,8 +17,8 @@
         android:title="Report"/>
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_setting"
         android:icon="@drawable/ic_user"
-        android:title="Profile"/>
+        android:title="Setting"/>
 
 </menu>

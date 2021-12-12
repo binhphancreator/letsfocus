@@ -35,10 +35,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        com.app.letsfocus.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Helper.loadToolbar(this, R.id.my_toolbar);
+
 
         BottomNavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setOnNavigationItemSelectedListener(menuItem -> {
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new TimeTableListFragment());
             } else if(id == R.id.navigation_report) {
                 loadFragment(new Report1Fragment());
-            } else if(id==R.id.navigation_profile) {
+            } else if(id==R.id.navigation_setting) {
                 loadFragment(new SettingFragment());
             }
             return true;
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
     private int getNotifyId(){
         return (int) new Date().getTime();
     }
+
+
 
     public void loadFragment(Fragment fragment) {
         Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, getSupportFragmentManager());

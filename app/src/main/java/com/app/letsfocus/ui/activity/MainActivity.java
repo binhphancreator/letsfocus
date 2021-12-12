@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.MINUTE, m-2);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_HOUR, pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 
     private int getNotifyId(){

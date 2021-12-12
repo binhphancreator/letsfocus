@@ -102,10 +102,10 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <ImageView
+            <com.github.mikephil.charting.charts.BarChart
                 android:layout_width="match_parent"
                 android:layout_height="360dp"
-                android:src="@drawable/line_chart"
+                android:id="@+id/bar_chart"
                 android:layout_marginTop="20dp"/>
             <Button
                 android:id="@+id/app_usage_btn"

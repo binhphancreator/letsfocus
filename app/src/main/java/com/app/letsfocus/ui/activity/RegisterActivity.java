@@ -1,6 +1,6 @@
 package com.app.letsfocus.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.app.letsfocus.R;

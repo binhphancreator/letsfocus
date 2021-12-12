@@ -12,35 +12,25 @@ import android.widget.Switch;
 
 import com.app.letsfocus.R;
 
-public class SettingFragment extends
-//        PreferenceFragment {
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        addPreferencesFromResource(R.xml.preferences);
-//    }
-//}
-//
-
- Fragment {
+public class SettingFragment extends Fragment {
 
 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_setting_new, container, false);
     Switch switchVisibility = view.findViewById(R.id.switch_notify);
 
 
-    switchVisibility.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if(switchVisibility.isChecked()){
-
-            }
-            else {
-
-            }
-        }
-
-    });
+//    switchVisibility.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//        @Override
+//        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//            if(switchVisibility.isChecked()){
+//
+//            }
+//            else {
+//
+//            }
+//        }
+//
+//    });
     RelativeLayout sound_btn = (RelativeLayout) view.findViewById(R.id.setting_sound);
     sound_btn.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -64,4 +54,11 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
 }
 
 }
-
+//        PreferenceFragment {
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        addPreferencesFromResource(R.xml.preferences);
+//    }
+//}
+//

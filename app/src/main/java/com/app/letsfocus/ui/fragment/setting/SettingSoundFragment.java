@@ -36,18 +36,18 @@ public class SettingSoundFragment extends Fragment {
 
         });
         Switch switchVibration = view.findViewById(R.id.switch_vibration);
-        switchVibration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switchVibration.isChecked()){
-
-                }
-                else {
-
-                }
-            }
-
-        });
+//        switchVibration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if(switchVibration.isChecked()){
+//
+//                }
+//                else {
+//
+//                }
+//            }
+//
+//        });
         return view;
     }
 

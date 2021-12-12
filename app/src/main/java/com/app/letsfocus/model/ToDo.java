@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -64,9 +65,9 @@ public class ToDo extends Model {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public String getNumTodoCompleted() {
+    public ArrayList getNumTodoCompleted() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String numToDoList = "";
+        ArrayList<String> numToDoList = new ArrayList();
         for(int i = 0; i < 7; i++) {
             int num_todo = 0;
             LocalDate date = LocalDate.now().minusDays(i);
@@ -76,7 +77,7 @@ public class ToDo extends Model {
             if(cursor.moveToFirst()) {
                 num_todo = cursor.getInt(1);
             }
-            numToDoList += num_todo + " ";
+            numToDoList.add(String.valueOf(num_todo));
         }
         return numToDoList;
     }

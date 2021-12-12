@@ -22,6 +22,7 @@ import com.app.letsfocus.ui.fragment.timetable.TimeTableListFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -69,32 +70,27 @@ public class MainActivity extends AppCompatActivity {
             startAlert(hour,minute);
 
             todoTime = "";
+            alarmManager.cancel(pendingIntent);
         }
     }
     private void startAlert(int h , int m) {
         intent =new Intent(MainActivity.this, RemiderBroadcast.class);
-        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0,intent,0);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, getNotifyId(),intent,PendingIntent.FLAG_CANCEL_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, h);
-        calendar.set(Calendar.MINUTE, m-5);
+        calendar.set(Calendar.MINUTE, m-2);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_HOUR, pendingIntent);
     }
 
+    private int getNotifyId(){
+        return (int) new Date().getTime();
+    }
+
     public void loadFragment(Fragment fragment) {
         Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, getSupportFragmentManager());
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (alarmManager != null) {
-            alarmManager.cancel(pendingIntent);
-        }
-    }
-
-
 }

@@ -3,8 +3,7 @@ package com.app.letsfocus.model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
+import androidx.annotation.RequiresApi;
 
 import com.app.letsfocus.core.Model;
 

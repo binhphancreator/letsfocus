@@ -1,21 +1,17 @@
 package com.app.letsfocus.ui.bottomsheet;
 
-import android.arch.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.RepeatTypeAdapter;
-import com.app.letsfocus.model.TypeRepeat;
 import com.app.letsfocus.ui.fragment.add_timetable.AddTimeTableViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TypeRepeatBottomSheetFragment extends BottomSheetDialogFragment {
     private AddTimeTableViewModel addTimeTableViewModel;

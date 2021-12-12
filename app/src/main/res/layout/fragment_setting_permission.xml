@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Application Permission"
+        android:textAlignment="center"
+        android:textColor="@color/primary_blue"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/permission_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_usage_title"
+        android:text="Application Usage Permission"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/permission_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:padding="15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notification Permission"
+        android:textSize="20sp"
+        android:id="@+id/notifi_title"
+        app:layout_constraintTop_toBottomOf="@id/app_usage_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:padding="15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Storage Permission"
+        android:textSize="20sp"
+        android:id="@+id/storage_title"
+        app:layout_constraintTop_toBottomOf="@id/notifi_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:padding="15dp"/>
+</android.support.constraint.ConstraintLayout>

@@ -63,12 +63,9 @@ public class MainActivity extends AppCompatActivity {
         for(int i= 0; i<listTime.size(); i++){
             int hour, minute;
             todoTime = String.valueOf(listTime.get(i).get("time"));
-            Log.e("check10", todoTime);
             String[] str = todoTime.split(":");
             hour = Integer.parseInt(str[0]);
             minute = Integer.parseInt(str[1]);
-            Log.e("check10", str[0]);
-            Log.e("check10", str[1]);
             startAlert(hour,minute);
 
             todoTime = "";

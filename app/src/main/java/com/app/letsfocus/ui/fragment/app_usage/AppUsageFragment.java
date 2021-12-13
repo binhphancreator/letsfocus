@@ -195,13 +195,12 @@ public class AppUsageFragment extends Fragment {
                 String packageName = item.getPackageName();
                 String[] packageNames = packageName.split("\\.");
                 String appName = packageNames[packageNames.length - 1].trim();
-                pieData.add(new PieEntry((float) item.getTotalTimeInForeground(), appName));
+                pieData.add(new PieEntry(item.getTotalTimeInForeground(), appName));
             } else {
                 timeUsedTotal = timeUsedTotal + item.getTotalTimeInForeground();
-                Log.w("aaa", String.valueOf(timeUsedTotal));
             }
         }
-        pieData.add(new PieEntry((float) totalTime, "others"));
+        pieData.add(new PieEntry(timeUsedTotal, "others"));
 
         showHideItemsWhenShowApps();
     }

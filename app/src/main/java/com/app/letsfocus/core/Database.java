@@ -22,7 +22,7 @@ public class Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
         sqLiteDatabase.execSQL("CREATE TABLE timetable(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, start_time TEXT, end_time TEXT, repeat INTEGER, date TEXT)");
-        sqLiteDatabase.execSQL("CREATE TABLE todo(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, time TEXT, duration TEXT, detail TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE todo(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, time TEXT, duration TEXT, detail TEXT, complete INTEGER)");
         sqLiteDatabase.execSQL("CREATE TABLE todobyday(date TEXT UNIQUE, num_todo INTERGER)");
     }
 
@@ -31,8 +31,10 @@ public class Database extends SQLiteOpenHelper {
     {
         String drop_table_timetable = String.format("DROP TABLE IF EXISTS %s", "timetable");
         String drop_table_todo = String.format("DROP TABLE IF EXISTS %s", "todo");
+        String drop_table_todobyday = String.format("DROP TABLE IF EXISTS %s", "todobyday");
         sqLiteDatabase.execSQL(drop_table_timetable);
         sqLiteDatabase.execSQL(drop_table_todo);
+        sqLiteDatabase.execSQL(drop_table_todobyday);
 
         onCreate(sqLiteDatabase);
     }

@@ -40,6 +40,14 @@ public class ToDo extends Model {
                                 " id = " + id;
         db.getWritableDatabase().execSQL(sqlUpdateTodo);
     }
+
+    public void updateStatus_complete(Integer id){
+        String sqlUpdateTodo =  "UPDATE todo" +
+                                " SET complete = " + 1 +
+                                " WHERE id = " +id;
+        db.getWritableDatabase().execSQL(sqlUpdateTodo);
+    }
+
     public ToDo getTodoById(Integer id) {
         this.find(id);
         return this;
@@ -80,5 +88,22 @@ public class ToDo extends Model {
             numToDoList.add(String.valueOf(num_todo));
         }
         return numToDoList;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getNumCompleteInComplte() {
+        String n = "";
+        int taskNum = 0;
+        String sqlcheckTotal = "SELECT COUNT(*) FROM todo";
+        String sqlcheckComplete = "SELECT COUNT(*) FROM todo WHERE complete = 1";
+        Cursor cursor = db.getReadableDatabase().rawQuery(sqlcheckTotal, null);
+        cursor.moveToFirst();
+        n = n + String.valueOf(cursor.getInt(0));
+        n = n + " ";
+        cursor = db.getReadableDatabase().rawQuery(sqlcheckComplete, null);
+        cursor.moveToFirst();
+        n = n + String.valueOf(cursor.getInt(0));
+
+        return n;
     }
 }

@@ -66,6 +66,7 @@ public class FocusActivity extends AppCompatActivity {
                 timerTextView.setText(Helper.convertSecondToTimeString(totalTime - timeTicked));
                 if((totalTime - timeTicked) < 1) {
                     toDoTmp.increaseTodo();
+                    toDoTmp.updateStatus_complete(Integer.parseInt(toDoModel.get("id")));
                     pauseFocus();
                 }
             }
@@ -104,6 +105,7 @@ public class FocusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toDoTmp.increaseTodo();
+                toDoTmp.updateStatus_complete(Integer.parseInt(toDoModel.get("id")));
                 finish();
             }
         });

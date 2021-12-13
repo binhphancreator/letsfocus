@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        sharedPreferences = getSharedPreferences("switch_state",MODE_PRIVATE);
-        b = sharedPreferences.getBoolean("state",true);
-        if(b){
-            configAlert();
-        }
-
+//        sharedPreferences = getSharedPreferences("switch_state",MODE_PRIVATE);
+//        b = sharedPreferences.getBoolean("state",true);
+//        if(b){
+//
+//        }
+        configAlert();
     }
 
     private void configAlert(){
@@ -100,5 +100,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadFragment(Fragment fragment) {
         Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, getSupportFragmentManager());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(alarmManager!=null){
+            alarmManager.cancel(pendingIntent);
+        }
     }
 }

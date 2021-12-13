@@ -1,6 +1,8 @@
 package com.app.letsfocus.ui.fragment.setting;
 
 import android.os.Bundle;
+
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentTransaction;
@@ -17,7 +19,7 @@ public class SettingFragment extends Fragment {
 
 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_setting_new, container, false);
-    Switch switchVisibility = view.findViewById(R.id.switch_notify);
+    SwitchCompat switchVisibility = view.findViewById(R.id.switch_notify);
 
 
 //    switchVisibility.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

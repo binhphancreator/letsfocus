@@ -5,10 +5,13 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.app.letsfocus.R;
 import com.app.letsfocus.model.ToDo;
@@ -20,6 +23,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -33,13 +37,30 @@ public class Report1Fragment extends Fragment {
 
     BarChart chart;
     private ToDo tmp;
+    TextView total_tv, complete_tv;
+    ValueFormatter vf;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_report1, container, false);
 
         chart = view.findViewById(R.id.bar_chart);
+        total_tv = view.findViewById(R.id.total_task);
+        complete_tv = view.findViewById(R.id.complete_task);
+
         tmp = new ToDo(getContext());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            total_tv.setText(tmp.getNumCompleteInComplte().split(" ")[0]);
+            complete_tv.setText(tmp.getNumCompleteInComplte().split(" ")[1]);
+        }
+
+        vf = new ValueFormatter() { //value format here, here is the overridden method
+            @Override
+            public String getFormattedValue(float value) {
+                return ""+(int)value;
+            }
+        };
 
         settingChart();
         setData();
@@ -91,12 +112,12 @@ public class Report1Fragment extends Fragment {
             dataSets.add(set1);
 
             BarData data = new BarData(dataSets);
+            data.setValueFormatter(vf);
             chart.setData(data);
             chart.setFitBars(true);
         }
 
         chart.invalidate();
-
     }
 
     private void settingChart() {
@@ -113,6 +134,7 @@ public class Report1Fragment extends Fragment {
             XAxisLabel.add(getCalculatedDate("dd/MM", i));
         }
 
+
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -126,6 +148,7 @@ public class Report1Fragment extends Fragment {
         leftAxis.setSpaceTop(3f);
         leftAxis.setDrawGridLines(false);
         leftAxis.setAxisMinimum(0f);
+        leftAxis.setValueFormatter(vf);
 
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.setEnabled(false);

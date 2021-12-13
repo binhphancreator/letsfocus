@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     List<Model> listTime = new ArrayList<>();
@@ -71,25 +72,23 @@ public class MainActivity extends AppCompatActivity {
             hour = Integer.parseInt(str[0]);
             minute = Integer.parseInt(str[1]);
             startAlert(hour,minute);
-            Log.e("check", String.valueOf(hour));
-            Log.e("check", String.valueOf(minute));
             todoTime = "";
-//            alarmManager.cancel(pendingIntent);
         }
     }
     private void startAlert(int h , int m) {
         intent =new Intent(MainActivity.this, RemiderBroadcast.class);
-        pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, h);
         calendar.set(Calendar.MINUTE, m-2);
         calendar.set(Calendar.SECOND,0);
-        calendar.set(Calendar.MILLISECOND,0);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+        if(alarmManager!= null){
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
     }
 
     public void loadFragment(Fragment fragment) {

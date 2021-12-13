@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.SET_ALARM"/>
 
     <application
@@ -34,7 +35,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.FocusActivity" />
-        <receiver android:name=".core.RemiderBroadcast"/>
+        <receiver android:name=".core.RemiderBroadcast"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

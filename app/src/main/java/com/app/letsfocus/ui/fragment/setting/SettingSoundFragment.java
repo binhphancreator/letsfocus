@@ -1,6 +1,8 @@
 package com.app.letsfocus.ui.fragment.setting;
 
 import android.os.Bundle;
+
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,7 +19,7 @@ public class SettingSoundFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting_sound, container, false);
         RelativeLayout ringtone_btn = (RelativeLayout) view.findViewById(R.id.setting_ringtone);
-        Switch switchSound = view.findViewById(R.id.switch_sound);
+        SwitchCompat switchSound = view.findViewById(R.id.switch_sound);
         switchSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -30,7 +32,7 @@ public class SettingSoundFragment extends Fragment {
             }
 
         });
-        Switch switchVibration = view.findViewById(R.id.switch_vibration);
+        SwitchCompat switchVibration = view.findViewById(R.id.switch_vibration);
 //        switchVibration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
 //            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

@@ -3,6 +3,7 @@ package com.app.letsfocus.ui.activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     Intent intent;
     AlarmManager alarmManager;
-
+    SharedPreferences sharedPreferences;
+    Boolean b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        configAlert();
+        sharedPreferences = getSharedPreferences("switch_state",MODE_PRIVATE);
+        b = sharedPreferences.getBoolean("state",true);
+        if(b){
+            configAlert();
+        }
+
     }
 
     private void configAlert(){

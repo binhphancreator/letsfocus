@@ -26,12 +26,11 @@ public class RemiderBroadcast extends BroadcastReceiver {
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         // Create the PendingIntent
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                context, getNotifyId(), notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
-        );
+                context,0, notifyIntent,0);
 
         Notification notification = new NotificationCompat.Builder(context, NoticeChannel.CHANNEL_ID_1)
                 .setContentTitle("Todo list")
-                .setContentText("Có công việc cần làm sau 5 phút nữa\n check app ngay nhé!")
+                .setContentText("Có công việc cần làm sau 5 phút nữa\n" +"check app ngay nhé!")
                 .setSmallIcon(R.drawable.ic_alarm_24)
                 .setContentIntent(notifyPendingIntent)
                 .setAutoCancel(true)

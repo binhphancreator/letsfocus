@@ -4,6 +4,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,33 +66,31 @@ public class MainActivity extends AppCompatActivity {
         for(int i= 0; i<listTime.size(); i++){
             int hour, minute;
             todoTime = String.valueOf(listTime.get(i).get("time"));
+            Log.e("check", todoTime);
             String[] str = todoTime.split(":");
             hour = Integer.parseInt(str[0]);
             minute = Integer.parseInt(str[1]);
             startAlert(hour,minute);
-
+            Log.e("check", String.valueOf(hour));
+            Log.e("check", String.valueOf(minute));
             todoTime = "";
-            alarmManager.cancel(pendingIntent);
+//            alarmManager.cancel(pendingIntent);
         }
     }
     private void startAlert(int h , int m) {
         intent =new Intent(MainActivity.this, RemiderBroadcast.class);
-        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, getNotifyId(),intent,PendingIntent.FLAG_CANCEL_CURRENT);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, h);
         calendar.set(Calendar.MINUTE, m-2);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
     }
-
-    private int getNotifyId(){
-        return (int) new Date().getTime();
-    }
-
-
 
     public void loadFragment(Fragment fragment) {
         Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, getSupportFragmentManager());

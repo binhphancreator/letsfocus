@@ -165,7 +165,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="60dp"
             android:gravity="fill_vertical"
-            android:text="Notifycation"
+            android:text="Notification"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -174,8 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:padding="15dp"
-            />
+            android:padding="15dp" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/setting_sound"

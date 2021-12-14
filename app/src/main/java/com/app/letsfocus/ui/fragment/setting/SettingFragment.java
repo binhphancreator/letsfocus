@@ -28,7 +28,7 @@ public class SettingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedPreferences = getContext().getSharedPreferences("switch_state", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences("switch_state", Context.MODE_PRIVATE);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,12 +42,9 @@ public class SettingFragment extends Fragment {
                 SharedPreferences.Editor editor =sharedPreferences.edit();
                 editor.putBoolean("state",b);
                 editor.commit();
-
-                switchVisibility.setChecked(sharedPreferences.getBoolean("state",b));
-
         }
-
     });
+    switchVisibility.setChecked(sharedPreferences.getBoolean("state",true));
     RelativeLayout sound_btn = (RelativeLayout) view.findViewById(R.id.setting_sound);
     sound_btn.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -69,13 +66,4 @@ public class SettingFragment extends Fragment {
 
     return view;
 }
-
 }
-//        PreferenceFragment {
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        addPreferencesFromResource(R.xml.preferences);
-//    }
-//}
-//

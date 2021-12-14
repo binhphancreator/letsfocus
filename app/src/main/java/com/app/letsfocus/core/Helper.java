@@ -12,9 +12,9 @@ public class Helper {
     public static void loadFragment(int id, Fragment fragment, FragmentManager fragmentManager)
     {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.detach(Objects.requireNonNull(fragmentManager.findFragmentById(id)));
-        transaction.replace(id, fragment);
-        transaction.commitNow();
+        transaction.replace(id, fragment, null);
+        transaction.setReorderingAllowed(true);
+        transaction.commit();
     }
 
     public static void loadToolbar(AppCompatActivity activity, int id)

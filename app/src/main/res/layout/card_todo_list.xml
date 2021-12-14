@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200px"
-    android:background="#F5F6FB"
-    android:paddingVertical="10dp">
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_radius_md_blue_100"
+    android:paddingVertical="10dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,11 +24,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
-        android:text="UI Design"
-        android:maxLines="2"
-        android:maxEms="10"
-        android:textStyle="bold"
         android:ellipsize="end"
+        android:maxEms="10"
+        android:maxLines="2"
+        android:text="UI Design"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />

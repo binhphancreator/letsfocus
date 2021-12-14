@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="#FFF">
 
 
     <LinearLayout
@@ -118,21 +118,17 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/setting_title1"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginLeft="5dp"
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/infor">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            android:src="@drawable/ic_baseline_settings_24" />
 
         <TextView
             android:id="@+id/textSystem"
@@ -142,8 +138,14 @@
             android:gravity="fill_vertical"
             android:text="System"
             android:textColor="@color/primary_blue"
-            android:textStyle="bold"
-            android:textSize="18sp"></TextView>
+            android:textSize="18sp"
+            android:textStyle="bold"></TextView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/ic_baseline_settings_24" />
 
     </RelativeLayout>
 
@@ -156,8 +158,7 @@
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setting_title1"
-        >
+        app:layout_constraintTop_toBottomOf="@id/setting_title1">
 
         <TextView
             android:id="@+id/notifications"
@@ -176,17 +177,17 @@
             android:layout_alignParentRight="true"
             android:padding="15dp" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/setting_sound"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
+        android:clickable="true"
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@id/setting_Notification"
-        >
+        app:layout_constraintTop_toBottomOf="@id/setting_Notification">
 
         <TextView
             android:layout_width="match_parent"
@@ -204,17 +205,17 @@
             android:padding="15dp"
             android:src="@drawable/ic_action_arrow" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/setting_Theme"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
+        android:clickable="true"
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@id/setting_sound"
-        >
+        app:layout_constraintTop_toBottomOf="@id/setting_sound">
 
         <TextView
 
@@ -231,21 +232,20 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:text="Light"
             android:padding="15dp"
-             />
+            android:text="Light" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/setting_permission"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
+        android:clickable="true"
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@id/setting_Theme"
-        >
+        app:layout_constraintTop_toBottomOf="@id/setting_Theme">
 
         <TextView
 
@@ -265,11 +265,12 @@
             android:padding="15dp"
             android:src="@drawable/ic_action_arrow" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/setting_title2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="16dp"
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -289,8 +290,8 @@
             android:gravity="fill_vertical"
             android:text="Information"
             android:textColor="@color/primary_blue"
-            android:textStyle="bold"
-            android:textSize="18sp"></TextView>
+            android:textSize="18sp"
+            android:textStyle="bold"></TextView>
 
     </RelativeLayout>
 
@@ -302,8 +303,7 @@
         android:divider="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setting_title2"
-        >
+        app:layout_constraintTop_toBottomOf="@id/setting_title2">
 
         <TextView
 
@@ -314,20 +314,19 @@
             android:text="Current Version"
             android:textColor="@color/black"
             android:textSize="18sp" />
+
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingRight="15dp"
             android:layout_alignParentRight="true"
+            android:gravity="fill_vertical"
+            android:paddingRight="15dp"
             android:text="1.0"
             android:textSize="18sp"
-            android:gravity="fill_vertical"
             app:layout_constraintStart_toStartOf="parent" />
 
     </RelativeLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

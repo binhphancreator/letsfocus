@@ -70,7 +70,7 @@ public class TimeTableListFragment extends Fragment {
     {
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        todayTimeTextView.setText(dateFormat.format(currentTime));
+        todayTimeTextView.setText(new SimpleDateFormat("EEEE, MM, yyyy").format(currentTime));
         renderTimeTableList(dateFormat.format(currentTime));
     }
 

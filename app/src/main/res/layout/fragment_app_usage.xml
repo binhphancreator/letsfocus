@@ -21,11 +21,11 @@
     <Button
         android:id="@+id/enable_btn"
         android:layout_width="300dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#fff"
-        android:background="#4285f4"
         android:layout_height="wrap_content"
-        android:text="Enable Usage Stats Permission" />
+        android:layout_gravity="center_horizontal"
+        android:background="#4285f4"
+        android:text="Enable Usage Stats Permission"
+        android:textColor="#212121" />
 
     <Button
         android:id="@+id/show_btn"

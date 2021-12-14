@@ -1,36 +1,23 @@
 package com.app.letsfocus.ui.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.app.letsfocus.R;
 import com.app.letsfocus.core.Helper;
-import com.app.letsfocus.core.Model;
-import com.app.letsfocus.core.RemiderBroadcast;
 import com.app.letsfocus.databinding.ActivityMainBinding;
-import com.app.letsfocus.model.ToDo;
 import com.app.letsfocus.ui.fragment.home.HomeFragment;
 import com.app.letsfocus.ui.fragment.report1.Report1Fragment;
 import com.app.letsfocus.ui.fragment.setting.SettingFragment;
 import com.app.letsfocus.ui.fragment.timetable.TimeTableListFragment;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.TimeZone;
-
 public class MainActivity extends AppCompatActivity {
-
+    private Toolbar toolbar;
+    private TextView toolbarTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,25 +26,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Helper.loadToolbar(this, R.id.my_toolbar);
-
+        toolbar = findViewById(R.id.my_toolbar);
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        loadFragment(new HomeFragment(), "To Do List");
 
         BottomNavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setOnNavigationItemSelectedListener(menuItem -> {
             int id = menuItem.getItemId();
             if(id == R.id.navigation_home) {
-                loadFragment(new HomeFragment());
+                loadFragment(new HomeFragment(), "To Do List");
             } else if(id == R.id.navigation_timetable) {
-                loadFragment(new TimeTableListFragment());
+                loadFragment(new TimeTableListFragment(), "Timetable");
             } else if(id == R.id.navigation_report) {
-                loadFragment(new Report1Fragment());
+                loadFragment(new Report1Fragment(), "Report");
             } else if(id==R.id.navigation_setting) {
-                loadFragment(new SettingFragment());
+                loadFragment(new SettingFragment(), "Setting");
             }
             return true;
         });
     }
 
-    public void loadFragment(Fragment fragment) {
+    public void loadFragment(Fragment fragment, String title) {
         Helper.loadFragment(R.id.nav_host_fragment_activity_main, fragment, getSupportFragmentManager());
+        toolbarTitle.setText(title);
     }
 }

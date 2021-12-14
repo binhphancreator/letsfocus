@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void startAlert(int h , int m) {
         intent = new Intent(MainActivity.this, RemiderBroadcast.class);
-        pendingIntent = PendingIntent.getService(MainActivity.this,0,intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

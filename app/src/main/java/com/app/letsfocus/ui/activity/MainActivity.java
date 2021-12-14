@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(MainActivity.this, RemiderBroadcast.class);
         pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, h);
         calendar.set(Calendar.MINUTE, m);

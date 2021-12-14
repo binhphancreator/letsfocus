@@ -1,11 +1,19 @@
 package com.app.letsfocus.ui.fragment.add_todo;
 
+import static android.content.Context.ALARM_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +26,19 @@ import android.widget.Toast;
 import com.app.letsfocus.R;
 import com.app.letsfocus.core.Helper;
 import com.app.letsfocus.core.Model;
+import com.app.letsfocus.core.RemiderBroadcast;
 import com.app.letsfocus.core.Validation;
 import com.app.letsfocus.model.ToDo;
+import com.app.letsfocus.ui.activity.MainActivity;
 import com.app.letsfocus.ui.fragment.home.HomeFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
+import java.util.TimeZone;
 
 public class AddTodoFragment extends Fragment {
     private EditText todoNameEt, todoDetailEt;
@@ -36,6 +49,9 @@ public class AddTodoFragment extends Fragment {
     private boolean isEdit;
     private ToDo toDoTemp;
     private int idTodoEdit;
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
+    Intent intent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +90,7 @@ public class AddTodoFragment extends Fragment {
                     if (Validation.require(name, time, duration)) {
                         toDoTemp.updateTodo(idTodoEdit,name,time,duration,detail);
                         Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                        configAlert(time);
                     }
                     else {
                         Toast.makeText(getContext(), "Không được bỏ trống", Toast.LENGTH_SHORT).show();
@@ -97,6 +114,7 @@ public class AddTodoFragment extends Fragment {
                     if (Validation.require(name, time, duration)) {
                         Model todoModel = new ToDo(getContext()).create(contentValues);
                         Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
+                        configAlert(time);
                     }
                     else {
                         Toast.makeText(getContext(), "Không được bỏ trống", Toast.LENGTH_SHORT).show();
@@ -106,6 +124,36 @@ public class AddTodoFragment extends Fragment {
         }
     }
 
+    private void configAlert(String time){
+            int hour, minute;
+            String[] str = time.split(":");
+            hour = Integer.parseInt(str[0]);
+            minute = Integer.parseInt(str[1]);
+            Log.e("check", String.valueOf(hour));
+        Log.e("check", String.valueOf(minute));
+            startAlert(hour,minute);
+    }
+    private void startAlert(int h , int m) {
+        intent = new Intent(getActivity(), RemiderBroadcast.class);
+        intent.setAction("un");
+        pendingIntent = PendingIntent.getBroadcast(getActivity(),code(),intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, h);
+        calendar.set(Calendar.MINUTE, m);
+        calendar.set(Calendar.SECOND,0);
+
+        alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+        if(alarmManager!= null){
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
+    }
+
+    private int code(){
+        int random = new Random().nextInt(34)+1;
+        return random;
+    }
     private void setTimeEvent(TextView textView, boolean isClock)
     {
         textView.setOnClickListener(new View.OnClickListener() {
@@ -164,5 +212,13 @@ public class AddTodoFragment extends Fragment {
         todoDurationTv.setText(toDoTemp.get("duration"));
         todoDetailEt.setText(toDoTemp.get("detail"));
         isEdit=true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(alarmManager!=null){
+            alarmManager.cancel(pendingIntent);
+        }
     }
 }

@@ -1,10 +1,15 @@
 package com.app.letsfocus.core;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -14,9 +19,15 @@ import com.app.letsfocus.ui.activity.MainActivity;
 import java.util.Date;
 
 public class RemiderBroadcast extends BroadcastReceiver {
+    SharedPreferences sharedPreferences;
+    Boolean b;
     @Override
     public void onReceive(Context context, Intent intent) {
-        sendNotification(context);
+        sharedPreferences = context.getSharedPreferences("switch_state",Context.MODE_PRIVATE);
+        b = sharedPreferences.getBoolean("state",true);
+        if(b){
+            sendNotification(context);
+        }
     }
 
     private void sendNotification(Context context){

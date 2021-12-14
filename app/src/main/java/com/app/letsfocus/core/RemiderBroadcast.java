@@ -26,7 +26,7 @@ public class RemiderBroadcast extends BroadcastReceiver {
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         // Create the PendingIntent
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                context,0, notifyIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+                context,0, notifyIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(context, NoticeChannel.CHANNEL_ID_1)
                 .setContentTitle("Todo list")

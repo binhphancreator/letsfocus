@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     List<Model> listTime = new ArrayList<>();
@@ -83,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void startAlert(int h , int m) {
-        intent =new Intent(MainActivity.this, RemiderBroadcast.class);
-        pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+        intent = new Intent(MainActivity.this, RemiderBroadcast.class);
+        pendingIntent = PendingIntent.getService(MainActivity.this,0,intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, h);
-        calendar.set(Calendar.MINUTE, m-2);
+        calendar.set(Calendar.MINUTE, m);
         calendar.set(Calendar.SECOND,0);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

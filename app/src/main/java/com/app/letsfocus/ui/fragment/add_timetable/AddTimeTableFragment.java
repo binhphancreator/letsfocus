@@ -298,8 +298,6 @@ public class AddTimeTableFragment extends Fragment {
                         for (int day:dayList) {
                             dayTmp += day + " ";
                         }
-                        Log.d("Day", "Which = " + which);
-                        Log.d("Day", "Ngay duoc chon" + dayTmp);
                     }
                 });
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -129,8 +129,6 @@ public class AddTodoFragment extends Fragment {
             String[] str = time.split(":");
             hour = Integer.parseInt(str[0]);
             minute = Integer.parseInt(str[1]);
-            Log.e("check", String.valueOf(hour));
-        Log.e("check", String.valueOf(minute));
             startAlert(hour,minute);
     }
     private void startAlert(int h , int m) {

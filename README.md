@@ -23,3 +23,11 @@
 - **Profile UI**: Nguyễn Ngọc Thành
 - **Setting UI**: Nguyễn Ngọc Thành
 - **Report 2 UI**: Nguyễn Ngọc Thành
+
+## Phân công 
+
+- **Trần Văn Luân**: Timetable, Focusscreen, To do, Music(23%)
+- **Phan Văn Bình**: Timetable, Focuscreen, To do, Countdown(20%)
+- **Nguyễn Kim Tùng**: Notification(18%)
+- **Nguyễn Ngọc Thành**: Chart(19%)
+- **Trần Hải Nam**: AppUsage, AppUi(20%)

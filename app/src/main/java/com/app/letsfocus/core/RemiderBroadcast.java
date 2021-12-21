@@ -41,7 +41,7 @@ public class RemiderBroadcast extends BroadcastReceiver {
 
         Notification notification = new NotificationCompat.Builder(context, NoticeChannel.CHANNEL_ID_1)
                 .setContentTitle("Todo list")
-                .setContentText("Có công việc cần làm sau 5 phút nữa\n" +"check app ngay nhé!")
+                .setContentText("Có công việc cần làm bây giờ check app ngay nhé!")
                 .setSmallIcon(R.drawable.ic_alarm_24)
                 .setContentIntent(notifyPendingIntent)
                 .setAutoCancel(true)

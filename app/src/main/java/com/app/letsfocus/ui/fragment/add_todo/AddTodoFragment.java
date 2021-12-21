@@ -133,7 +133,6 @@ public class AddTodoFragment extends Fragment {
     }
     private void startAlert(int h , int m) {
         intent = new Intent(getActivity(), RemiderBroadcast.class);
-        intent.setAction("un");
         pendingIntent = PendingIntent.getBroadcast(getActivity(),code(),intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
@@ -210,13 +209,5 @@ public class AddTodoFragment extends Fragment {
         todoDurationTv.setText(toDoTemp.get("duration"));
         todoDetailEt.setText(toDoTemp.get("detail"));
         isEdit=true;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(alarmManager!=null){
-            alarmManager.cancel(pendingIntent);
-        }
     }
 }

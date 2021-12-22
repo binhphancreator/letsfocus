@@ -21,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.TimeTableAdapter;
@@ -137,6 +138,7 @@ public class TimeTableListFragment extends Fragment {
             TimeTable timeTable = new TimeTable(getContext());
             timeTable.delete(Integer.parseInt(listData.get(isSelected).get("id")));
             listData.remove(isSelected);
+            Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
             adapter.notifyDataSetChanged();
         }
         else if(item.getItemId() == R.id.update) {

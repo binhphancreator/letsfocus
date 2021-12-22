@@ -89,6 +89,7 @@ public class AddTodoFragment extends Fragment {
                     String detail = todoDetailEt.getText().toString();
                     if (Validation.require(name, time, duration)) {
                         toDoTemp.updateTodo(idTodoEdit,name,time,duration,detail);
+                        Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
                         Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
                         configAlert(time);
                     }
@@ -113,6 +114,7 @@ public class AddTodoFragment extends Fragment {
                     contentValues.put("detail", detail);
                     if (Validation.require(name, time, duration)) {
                         Model todoModel = new ToDo(getContext()).create(contentValues);
+                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                         Helper.loadFragment(R.id.nav_host_fragment_activity_main, new HomeFragment(), getFragmentManager());
                         configAlert(time);
                     }

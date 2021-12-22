@@ -113,6 +113,7 @@ public class AddTimeTableFragment extends Fragment {
                 if(isEdit) {
                     if (Validation.require(name, time_start, time_end)) {
                         timeTableTemp.updateTimeTable(idTimeTableEdit,name,time_start,time_end,repeat,date);
+                        Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
                         Helper.loadFragment(R.id.nav_host_fragment_activity_main, new TimeTableListFragment(), getFragmentManager());
                     }
                     else {
@@ -128,6 +129,7 @@ public class AddTimeTableFragment extends Fragment {
                     contentValues.put("date",date);
                     if (Validation.require(name, time_start, time_end)) {
                         Model timetableModel = new TimeTable(getContext()).create(contentValues);
+                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                         Helper.loadFragment(R.id.nav_host_fragment_activity_main, new TimeTableListFragment(), getFragmentManager());
                     }
                     else {

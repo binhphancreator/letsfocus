@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.app.letsfocus.ui.activity.FocusActivity;
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.ToDoListAdapter;
@@ -91,6 +93,7 @@ public class HomeFragment extends Fragment {
         if(item.getItemId() == R.id.delete) {
             ToDo toDo = new ToDo(getContext());
             toDo.delete(Integer.parseInt(listData.get(isSelected).get("id")));
+            Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
             renderToDoList();
         }
         else if(item.getItemId() == R.id.update) {

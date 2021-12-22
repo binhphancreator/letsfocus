@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.app.letsfocus.R;
 import com.app.letsfocus.adapter.TimeTableAdapter;
@@ -71,6 +72,7 @@ public class AllTimeTableFragment extends Fragment {
         if(item.getItemId() == R.id.delete) {
             TimeTable timeTable = new TimeTable(getContext());
             timeTable.delete(Integer.parseInt(listData.get(isSelected).get("id")));
+            Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
             renderTimeTableList();
         }
         else if(item.getItemId() == R.id.update) {

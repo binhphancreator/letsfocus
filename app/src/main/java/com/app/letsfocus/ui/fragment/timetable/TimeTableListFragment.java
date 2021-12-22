@@ -71,7 +71,7 @@ public class TimeTableListFragment extends Fragment {
     {
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        todayTimeTextView.setText(new SimpleDateFormat("EEEE, MM, yyyy").format(currentTime));
+        todayTimeTextView.setText(new SimpleDateFormat("EEEE, dd-MM-yyyy").format(currentTime));
         renderTimeTableList(dateFormat.format(currentTime));
     }
 
@@ -116,7 +116,7 @@ public class TimeTableListFragment extends Fragment {
                 calendar.set(Calendar.MONTH,month);
                 calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
                 SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-                todayTimeTextView.setText(new SimpleDateFormat("EEEE, MM, yyyy").format(calendar.getTime()));
+                todayTimeTextView.setText(new SimpleDateFormat("EEEE, dd-MM-yyyy").format(calendar.getTime()));
                 renderTimeTableList(simpleDateFormat.format(calendar.getTime()));
             }
         };

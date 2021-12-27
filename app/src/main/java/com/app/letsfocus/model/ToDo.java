@@ -72,6 +72,7 @@ public class ToDo extends Model {
         }
     }
 
+    // get arraylist of number of tasks completed of 7 days from today
     @RequiresApi(api = Build.VERSION_CODES.O)
     public ArrayList getNumTodoCompleted() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -90,6 +91,7 @@ public class ToDo extends Model {
         return numToDoList;
     }
 
+    // get number of task in to do list and completed task
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String getNumCompleteInComplte() {
         String n = "";

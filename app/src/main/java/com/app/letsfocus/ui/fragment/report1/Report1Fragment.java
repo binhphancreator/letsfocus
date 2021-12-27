@@ -51,10 +51,11 @@ public class Report1Fragment extends Fragment {
         tmp = new ToDo(getContext());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // set number of all task and completed task
             total_tv.setText(tmp.getNumCompleteInComplte().split(" ")[0]);
             complete_tv.setText(tmp.getNumCompleteInComplte().split(" ")[1]);
         }
-
+        // data format from float to int for chart Y axis
         vf = new ValueFormatter() { //value format here, here is the overridden method
             @Override
             public String getFormattedValue(float value) {
@@ -82,11 +83,14 @@ public class Report1Fragment extends Fragment {
         ArrayList<BarEntry> values = new ArrayList<>();
         ArrayList<String> Yvalue = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // get data from database
             Yvalue = tmp.getNumTodoCompleted();
         }
+        // reverse data list
         Collections.reverse(Yvalue);
 
         for (int i = 0; i < 7; i++) {
+            // add data to BarchartEntry
             values.add(new BarEntry(i, Float.parseFloat(Yvalue.get(i))));
         }
 
@@ -98,8 +102,10 @@ public class Report1Fragment extends Fragment {
             set1.setDrawValues(true);
             set1.setValueTextSize(10f);
             set1.setValueTextColor(Color.BLACK);
+            // set data to chart
             set1.setValues(values);
             chart.getData().notifyDataChanged();
+            // update when data changed
             chart.notifyDataSetChanged();
         } else {
             set1 = new BarDataSet(values, "Data Set");
@@ -108,54 +114,68 @@ public class Report1Fragment extends Fragment {
             set1.setValueTextSize(10f);
             set1.setValueTextColor(Color.BLACK);
 
+            // add data to bardataset
             ArrayList<IBarDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
 
+            // add data to bar data
             BarData data = new BarData(dataSets);
             data.setValueFormatter(vf);
             chart.setData(data);
             chart.setFitBars(true);
         }
-
+        // redraw/update chart
         chart.invalidate();
     }
 
     private void settingChart() {
-
+        // disable bar shadow
         chart.setDrawBarShadow(false);
         chart.setDrawValueAboveBar(true);
+        // disable bar chart description
         chart.getDescription().setEnabled(false);
+        // max bar can visible
         chart.setMaxVisibleValueCount(10);
         chart.setPinchZoom(false);
+        // disable background frid
         chart.setDrawGridBackground(false);
 
         final ArrayList<String> XAxisLabel= new ArrayList<>();
         for(int i = -6; i <= 0; i++){
+            // get recent 7 days
             XAxisLabel.add(getCalculatedDate("dd/MM", i));
         }
 
-
+        // set up  X axis
         XAxis xAxis = chart.getXAxis();
+        // X axis position
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
-        xAxis.setGranularity(1f); // only intervals of 1 day
+        xAxis.setGranularity(1f);
+        // label can visible
         xAxis.setLabelCount(6);
+        // format X data to dat/month
         xAxis.setValueFormatter(new IndexAxisValueFormatter(XAxisLabel));
 
+        // set up Y axis
         YAxis leftAxis = chart.getAxisLeft();
+        // 9 data can visible
         leftAxis.setLabelCount(9, true);
+        // y axis position
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(3f);
         leftAxis.setDrawGridLines(false);
         leftAxis.setAxisMinimum(0f);
+        // format int data
         leftAxis.setValueFormatter(vf);
-
+        // disable right Y axis
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.setEnabled(false);
-
+        // disable chart legend
         chart.getLegend().setEnabled(false);
     }
 
+    // get 7 days back from today
     public static String getCalculatedDate(String dateFormat, int days) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat s = new SimpleDateFormat(dateFormat);

@@ -53,21 +53,22 @@ import java.util.stream.Collectors;
 
 public class AppUsageFragment extends Fragment {
 
-    Button enableBtn, showBtn;
-    TextView permissionDescriptionTv, usageTv, tv1;
+    Button enableBtn;
+    TextView permissionDescriptionTv, usageTv;
     ListView appsList;
     View root;
     PieChart chart;
     FrameLayout frameChart;
     long timeUsedTotal = 0;
     ArrayList<PieEntry> pieData = new ArrayList<>();
+    long start = System.currentTimeMillis() - 1000 * 3600 * 24;
+    long end = System.currentTimeMillis();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_app_usage, container, false);
         enableBtn = root.findViewById(R.id.enable_btn);
-        showBtn = root.findViewById(R.id.show_btn);
         permissionDescriptionTv = root.findViewById(R.id.permission_description_tv);
         usageTv = root.findViewById(R.id.usage_tv);
         appsList = root.findViewById(R.id.apps_list);
@@ -75,7 +76,7 @@ public class AppUsageFragment extends Fragment {
         frameChart = root.findViewById(R.id.layout_chart);
 
         //set  up chart
-        chart.setExtraOffsets(50, 10, 50, 10);
+        chart.setExtraOffsets(30, 10, 30, 10);
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setDragDecelerationFrictionCoef(0.3f);
@@ -103,8 +104,6 @@ public class AppUsageFragment extends Fragment {
         return root;
     }
 
-
-    // each time the application gets in foreground -> getGrantStatus and render the corresponding buttons
     @Override
     public void onStart() {
         super.onStart();
@@ -115,77 +114,77 @@ public class AppUsageFragment extends Fragment {
             enableBtn.setOnClickListener(view -> startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)));
         }
     }
+    /**
+     * Kiem tra quyen cap he thong
+     * @return true neu da cap quyen
+     */
+    private boolean getGrantStatus() {
+        AppOpsManager appOps = (AppOpsManager) getActivity().getApplicationContext()
+                .getSystemService(Context.APP_OPS_SERVICE);
+
+        int mode = appOps.checkOpNoThrow(OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(), getActivity().getApplicationContext().getPackageName());
+
+        return (mode == MODE_ALLOWED);
+
+    }
 
 
     /**
-     * load the usage stats for last 24h
+     * lay du lieu su dung app trong 24h
      */
 
     public void loadStatistics() {
         UsageStatsManager usm = (UsageStatsManager) getActivity().getSystemService(getActivity().USAGE_STATS_SERVICE);
-        List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, System.currentTimeMillis() - 1000 * 3600 * 24, System.currentTimeMillis());
+        List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, start , end);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             appList = appList.stream().filter(app -> app.getTotalTimeInForeground() > 0).collect(Collectors.toList());
         }
 
-        // Group the usageStats by application and sort them by total time in foreground
+        // nhom cac du lieu su dung theo app va thoi gian start - end
         if (appList.size() > 0) {
-            Map<String, UsageStats> mySortedMap = new TreeMap<>();
-            for (UsageStats usageStats : appList) {
-                mySortedMap.put(usageStats.getPackageName(), usageStats);
-            }
-            showAppsUsage(mySortedMap);
+            Map<String, UsageStats> sortedMap = usm.queryAndAggregateUsageStats(start, end);
+            showAppsUsage(sortedMap);
         }
     }
 
 
-    public void showAppsUsage(Map<String, UsageStats> mySortedMap) {
-        //public void showAppsUsage(List<UsageStats> usageStatsList) {
+    public void showAppsUsage(Map<String, UsageStats> sortedMap) {
         ArrayList<App> appsList = new ArrayList<>();
-        List<UsageStats> usageStatsList = new ArrayList<>(mySortedMap.values());
+        List<UsageStats> usageStatsList = new ArrayList<>(sortedMap.values());
 
-        // sort the applications by time spent in foreground
+        // sap xep thoi gian cac ung dung chay
         Collections.sort(usageStatsList, Comparator.comparingLong(UsageStats::getTotalTimeInForeground));
 
-        // get total time of apps usage to calculate the usagePercentage for each app
+        //tong thoi gian da dung dien thoai
         long totalTime = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             totalTime = usageStatsList.stream().map(UsageStats::getTotalTimeInForeground).mapToLong(Long::longValue).sum();
         }
 
-        //fill the appsList
+        //tao appsList
         for (UsageStats usageStats : usageStatsList) {
             try {
                 String packageName = usageStats.getPackageName();
-                Drawable icon = getActivity().getDrawable(R.drawable.no_image);
-                String[] packageNames = packageName.split("\\.");
-                String appName = packageNames[packageNames.length - 1].trim();
-
-
-                if (isAppInfoAvailable(usageStats)) {
-                    ApplicationInfo ai = getActivity().getApplicationContext().getPackageManager().getApplicationInfo(packageName, 0);
-                    icon = getActivity().getApplicationContext().getPackageManager().getApplicationIcon(ai);
-                    appName = getActivity().getApplicationContext().getPackageManager().getApplicationLabel(ai).toString();
-                }
-
+                ApplicationInfo ai = getActivity().getApplicationContext().getPackageManager().getApplicationInfo(packageName, 0);
+                Drawable icon = getActivity().getApplicationContext().getPackageManager().getApplicationIcon(ai);
+                String appName = getActivity().getApplicationContext().getPackageManager().getApplicationLabel(ai).toString();
+                //convert tu (long) thoi gian to (String) thoi gian
                 String usageDuration = getDurationBreakdown(usageStats.getTotalTimeInForeground());
+
                 int usagePercentage = (int) (usageStats.getTotalTimeInForeground() * 100 / totalTime);
 
-                App usageStatDTO = new App(icon, appName, usagePercentage, usageDuration);
-                appsList.add(usageStatDTO);
+                App appUsageStats = new App(icon, appName, usagePercentage, usageDuration);
+                if(usagePercentage>1) appsList.add(appUsageStats);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
         }
-
-
-        // reverse the list to get most usage first
+        // dao vi tri danh sach cac app duoc su dung nhieu nhat
         Collections.reverse(appsList);
-        // build the adapter
+        // tao adapter
         AppAdapter adapter = new AppAdapter(getActivity(), appsList);
-
-
-        // attach the adapter to a ListView
+        // gan adapter sang ListView
         ListView listView = root.findViewById(R.id.apps_list);
         listView.setAdapter(adapter);
 
@@ -206,45 +205,10 @@ public class AppUsageFragment extends Fragment {
     }
 
     /**
-     * check if PACKAGE_USAGE_STATS permission is aloowed for this application
-     *
-     * @return true if permission granted
+     * convert tu (long) thoi gian to (String) thoi gian
      */
-    private boolean getGrantStatus() {
-        AppOpsManager appOps = (AppOpsManager) getActivity().getApplicationContext()
-                .getSystemService(Context.APP_OPS_SERVICE);
 
-        int mode = appOps.checkOpNoThrow(OPSTR_GET_USAGE_STATS,
-                android.os.Process.myUid(), getActivity().getApplicationContext().getPackageName());
-
-        if (mode == AppOpsManager.MODE_DEFAULT) {
-            return (getActivity().getApplicationContext().checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
-        } else {
-            return (mode == MODE_ALLOWED);
-        }
-    }
-
-
-    private boolean isAppInfoAvailable(UsageStats usageStats) {
-        try {
-            getActivity().getApplicationContext().getPackageManager().getApplicationInfo(usageStats.getPackageName(), 0);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
-
-    /**
-     * helper method to get string in format hh:mm:ss from miliseconds
-     *
-     * @param millis (application time in foreground)
-     * @return string in format hh:mm:ss from miliseconds
-     */
     private String getDurationBreakdown(long millis) {
-        if (millis < 0) {
-            throw new IllegalArgumentException("Duration must be greater than zero!");
-        }
 
         long hours = TimeUnit.MILLISECONDS.toHours(millis);
         millis -= TimeUnit.HOURS.toMillis(hours);
@@ -255,25 +219,26 @@ public class AppUsageFragment extends Fragment {
         return (hours + " h " + minutes + " m " + seconds + " s");
     }
 
-
     /**
-     * helper method used to show/hide items in the view when  PACKAGE_USAGE_STATS permission is not allowed
+     * giao dien khi chua duoc cap quyen
      */
-    public void showHideNoPermission() {
 
+    public void showHideNoPermission() {
         enableBtn.setVisibility(View.VISIBLE);
         permissionDescriptionTv.setVisibility(View.VISIBLE);
-        showBtn.setVisibility(View.GONE);
         usageTv.setVisibility(View.GONE);
         appsList.setVisibility(View.GONE);
-
+        chart.setVisibility(View.GONE);
+        frameChart.setVisibility(View.GONE);
     }
 
+    /**
+     * giao dien khi da duoc cap quyen
+     */
 
     public void showHideItemsWhenShowApps() {
         enableBtn.setVisibility(View.GONE);
         permissionDescriptionTv.setVisibility(View.GONE);
-        showBtn.setVisibility(View.GONE);
         usageTv.setVisibility(View.VISIBLE);
         appsList.setVisibility(View.VISIBLE);
         chart.setVisibility(View.VISIBLE);

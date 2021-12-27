@@ -16,17 +16,15 @@ import java.util.ArrayList;
 
 public class AppAdapter extends ArrayAdapter<App> {
 
-    public AppAdapter(Context context, ArrayList<App> usageStatDTOArrayList) {
-        super(context, 0, usageStatDTOArrayList);
+    public AppAdapter(Context context, ArrayList<App> usageStatArrayList) {
+        super(context, 0, usageStatArrayList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        // Get the data item for this position
+        // lay du lieu theo vi tri
         App usageStats = getItem(position);
-
-        // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.card_item_app, parent, false);
         }
@@ -37,15 +35,12 @@ public class AppAdapter extends ArrayAdapter<App> {
         ImageView icon_img =  convertView.findViewById(R.id.icon_img);
         ProgressBar progressBar = convertView.findViewById(R.id.progressBar);
 
-
-        // Populate the data into the template view using the data object
         app_name_tv.setText(usageStats.appName);
         usage_duration_tv.setText(usageStats.usageDuration);
         usage_perc_tv.setText(usageStats.usagePercentage + "%");
         icon_img.setImageDrawable(usageStats.appIcon);
         progressBar.setProgress(usageStats.usagePercentage);
 
-        // Return the completed view to render on screen
         return convertView;
     }
 }

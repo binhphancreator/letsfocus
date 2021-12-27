@@ -23,25 +23,16 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="#4285f4"
+        android:background="@drawable/roundbutton"
         android:text="Enable Usage Stats Permission"
-        android:textColor="#212121" />
-
-    <Button
-        android:id="@+id/show_btn"
-        android:visibility="gone"
-        android:layout_width="300dp"
-        android:layout_gravity="center"
-        android:textColor="#fff"
-        android:background="#4285f4"
-        android:layout_height="wrap_content"
-        android:text="Show My Apps Usage" />
+        android:backgroundTint="@color/primary_blue"
+        android:textColor="@color/white" />
 
 <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="300dp"
     android:id="@+id/layout_chart"
-    android:visibility="gone">
+    android:visibility="visible">
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,7 +51,7 @@
         android:text="Your Apps Usage For Last 24 Hours" />
 
     <ListView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/apps_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

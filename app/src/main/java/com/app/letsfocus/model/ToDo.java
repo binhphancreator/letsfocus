@@ -59,14 +59,14 @@ public class ToDo extends Model {
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(currentTime);
-        String sqlCheck = "SELECT * FROM todobyday WHERE date = '"+ date + "'";
+        String sqlCheck = "SELECT * FROM date WHERE date = '"+ date + "'";
         Cursor cursor =  db.getWritableDatabase().rawQuery(sqlCheck,null);
         if(cursor.moveToFirst()) {
-            String sqlUpdate = "UPDATE todobyday SET num_todo = num_todo + 1 WHERE date = '" + date + "'";
+            String sqlUpdate = "UPDATE date SET num_todo = num_todo + 1 WHERE date = '" + date + "'";
             db.getWritableDatabase().execSQL(sqlUpdate);
         }
         else {
-            String sqlInsert = "INSERT INTO todobyday (date, num_todo)" +
+            String sqlInsert = "INSERT INTO date (date, num_todo)" +
                     " VALUES ('"+ date +"',1)";
             db.getWritableDatabase().execSQL(sqlInsert);
         }
@@ -81,7 +81,7 @@ public class ToDo extends Model {
             int num_todo = 0;
             LocalDate date = LocalDate.now().minusDays(i);
             String dateStr = date.format(formatter);
-            String sqlGetNumTodo = "SELECT * FROM todobyday WHERE date = '" + date + "'";
+            String sqlGetNumTodo = "SELECT * FROM date WHERE date = '" + date + "'";
             Cursor cursor = db.getReadableDatabase().rawQuery(sqlGetNumTodo, null);
             if(cursor.moveToFirst()) {
                 num_todo = cursor.getInt(1);

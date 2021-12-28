@@ -74,12 +74,7 @@ public class AppUsageFragment extends Fragment {
         appsList = root.findViewById(R.id.apps_list);
         chart = root.findViewById(R.id.report_piechart);
         frameChart = root.findViewById(R.id.layout_chart);
-
-        //set  up chart
         settingChart();
-
-        // set up data
-
         setData();
 
         return root;
@@ -168,22 +163,23 @@ public class AppUsageFragment extends Fragment {
         // gan adapter sang ListView
         ListView listView = root.findViewById(R.id.apps_list);
         listView.setAdapter(adapter);
-
         /**
          * tao chart
          */
-
         Collections.reverse(usageStatsList);
         for(UsageStats item : usageStatsList){
+            // get 4 most use app
             if (pieData.size() < 4 ) {
                 String packageName = item.getPackageName();
                 String[] packageNames = packageName.split("\\.");
                 String appName = packageNames[packageNames.length - 1].trim();
+                // add data of 1 app to arraylist
                 pieData.add(new PieEntry(item.getTotalTimeInForeground(), appName));
             } else {
                 timeUsedTotal = timeUsedTotal + item.getTotalTimeInForeground();
             }
         }
+        // add data of all other app
         pieData.add(new PieEntry(timeUsedTotal, "others"));
 
         showHideItemsWhenShowApps();
@@ -231,7 +227,6 @@ public class AppUsageFragment extends Fragment {
 
     }
 
-    // set up chart
     private void settingChart(){
         // chart position
         chart.setExtraOffsets(30, 10, 30, 10);
@@ -259,36 +254,33 @@ public class AppUsageFragment extends Fragment {
     }
 
     private void setData() {
-
+        // add data to dataset
         PieDataSet dataSet = new PieDataSet(pieData, "App Usage");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
 
-        // add a lot of colors
+        // add color for chart
         ArrayList<Integer> colors = new ArrayList<>();
-        for (int c : ColorTemplate.JOYFUL_COLORS)
+        for (int c : ColorTemplate.MATERIAL_COLORS)
             colors.add(c);
         dataSet.setColors(colors);
 
-        //dataSet.setSelectionShift(0f);
-
-
+        // customize data outside
         dataSet.setValueLinePart1OffsetPercentage(80.f);
         dataSet.setValueLinePart1Length(0.2f);
         dataSet.setValueLinePart2Length(0.4f);
-
+        // data position
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setXValuePosition(PieDataSet.ValuePosition.INSIDE_SLICE);
 
+        // add data to chart
         PieData data = new PieData(dataSet);
+        // data format %
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.BLACK);
         chart.setData(data);
-
-        // undo all highlights
-        chart.highlightValues(null);
-
+        // redraw/update chart
         chart.invalidate();
     }
 }

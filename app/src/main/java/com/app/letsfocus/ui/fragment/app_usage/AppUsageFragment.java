@@ -119,7 +119,11 @@ public class AppUsageFragment extends Fragment {
 
         // nhom cac du lieu su dung theo app va thoi gian start - end
         if (appList.size() > 0) {
-            Map<String, UsageStats> sortedMap = usm.queryAndAggregateUsageStats(start, end);
+//            Map<String, UsageStats> sortedMap = usm.queryAndAggregateUsageStats(start, end);
+            Map<String, UsageStats> sortedMap = new TreeMap<>();
+            for (UsageStats usageStats : appList) {
+                sortedMap.put(usageStats.getPackageName(), usageStats);
+            }
             showAppsUsage(sortedMap);
         }
     }
@@ -134,7 +138,7 @@ public class AppUsageFragment extends Fragment {
 
         //tong thoi gian da dung dien thoai
         long totalTime = 0;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             totalTime = usageStatsList.stream().map(UsageStats::getTotalTimeInForeground).mapToLong(Long::longValue).sum();
         }
 
@@ -142,16 +146,22 @@ public class AppUsageFragment extends Fragment {
         for (UsageStats usageStats : usageStatsList) {
             try {
                 String packageName = usageStats.getPackageName();
-                ApplicationInfo ai = getActivity().getApplicationContext().getPackageManager().getApplicationInfo(packageName, 0);
-                Drawable icon = getActivity().getApplicationContext().getPackageManager().getApplicationIcon(ai);
-                String appName = getActivity().getApplicationContext().getPackageManager().getApplicationLabel(ai).toString();
-                //convert tu (long) thoi gian to (String) thoi gian
-                String usageDuration = getDurationBreakdown(usageStats.getTotalTimeInForeground());
+                Drawable icon = getActivity().getDrawable(R.drawable.no_image);
+                String[] packageNames = packageName.split("\\.");
+                String appName = packageNames[packageNames.length-1].trim();
 
+
+                if(isAppInfoAvailable(usageStats)){
+                    ApplicationInfo ai = getActivity().getApplicationContext().getPackageManager().getApplicationInfo(packageName, 0);
+                    icon = getActivity().getApplicationContext().getPackageManager().getApplicationIcon(ai);
+                    appName = getActivity().getApplicationContext().getPackageManager().getApplicationLabel(ai).toString();
+                }
+
+                String usageDuration = getDurationBreakdown(usageStats.getTotalTimeInForeground());
                 int usagePercentage = (int) (usageStats.getTotalTimeInForeground() * 100 / totalTime);
 
-                App appUsageStats = new App(icon, appName, usagePercentage, usageDuration);
-                if(usagePercentage>1) appsList.add(appUsageStats);
+                App usageStatDTO = new App(icon, appName, usagePercentage, usageDuration);
+                appsList.add(usageStatDTO);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -183,6 +193,15 @@ public class AppUsageFragment extends Fragment {
         pieData.add(new PieEntry(timeUsedTotal, "others"));
 
         showHideItemsWhenShowApps();
+    }
+
+    private boolean isAppInfoAvailable(UsageStats usageStats) {
+        try {
+            getActivity().getApplicationContext().getPackageManager().getApplicationInfo(usageStats.getPackageName(), 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     /**

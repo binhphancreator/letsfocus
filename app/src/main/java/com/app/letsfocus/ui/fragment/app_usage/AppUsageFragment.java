@@ -76,26 +76,7 @@ public class AppUsageFragment extends Fragment {
         frameChart = root.findViewById(R.id.layout_chart);
 
         //set  up chart
-        chart.setExtraOffsets(30, 10, 30, 10);
-        chart.setUsePercentValues(true);
-        chart.getDescription().setEnabled(false);
-        chart.setDragDecelerationFrictionCoef(0.3f);
-        chart.setCenterTextTypeface(Typeface.DEFAULT);
-//        chart.setCenterText("Your apps used time");
-//        chart.setCenterTextSize(20);
-        chart.setDrawHoleEnabled(true);
-        chart.setHoleColor(Color.WHITE);
-        chart.setTransparentCircleColor(Color.WHITE);
-        chart.setTransparentCircleAlpha(110);
-        chart.setHoleRadius(70f);
-        chart.setTransparentCircleRadius(61f);
-        chart.setDrawCenterText(true);
-        chart.setRotationAngle(0);
-        // enable rotation of the chart by touch
-        chart.setRotationEnabled(true);
-        chart.setHighlightPerTapEnabled(true);
-        chart.animateY(1400, Easing.EaseInOutQuad);
-        chart.getLegend().setEnabled(false);
+        settingChart();
 
         // set up data
 
@@ -188,6 +169,10 @@ public class AppUsageFragment extends Fragment {
         ListView listView = root.findViewById(R.id.apps_list);
         listView.setAdapter(adapter);
 
+        /**
+         * tao chart
+         */
+
         Collections.reverse(usageStatsList);
         for(UsageStats item : usageStatsList){
             if (pieData.size() < 4 ) {
@@ -246,11 +231,31 @@ public class AppUsageFragment extends Fragment {
 
     }
 
-    private SpannableString generateCenterText() {
-        SpannableString s = new SpannableString("Your apps used time");
-        s.setSpan(new RelativeSizeSpan(2f), 0, 9, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 9, s.length(), 0);
-        return s;
+    // set up chart
+    private void settingChart(){
+        // chart position
+        chart.setExtraOffsets(30, 10, 30, 10);
+        // enable percent value
+        chart.setUsePercentValues(true);
+        // disable chart description
+        chart.getDescription().setEnabled(false);
+        chart.setDragDecelerationFrictionCoef(0.3f);
+        // draw hole inside chart
+        chart.setDrawHoleEnabled(true);
+        chart.setHoleColor(Color.WHITE);
+        chart.setTransparentCircleColor(Color.WHITE);
+        chart.setTransparentCircleAlpha(255);
+        // chart hole radius
+        chart.setHoleRadius(70f);
+        chart.setTransparentCircleRadius(61f);
+        // enable rotation of the chart by touch
+        chart.setRotationEnabled(true);
+        // highlight on tap
+        chart.setHighlightPerTapEnabled(true);
+        // chart animation
+        chart.animateY(1400, Easing.EaseInOutQuad);
+        // disable chart legend
+        chart.getLegend().setEnabled(false);
     }
 
     private void setData() {
